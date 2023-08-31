@@ -1,5 +1,5 @@
 // Course:			IGME 309
-// Student Name:	
+// Student Name:	Ben Sultzer
 // Friday Exercise:	01
 
 #define _CRT_SECURE_NO_WARNINGS
