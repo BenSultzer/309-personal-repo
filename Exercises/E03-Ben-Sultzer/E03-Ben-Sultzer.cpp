@@ -20,15 +20,21 @@ void init(void)
 }
 
 void DrawTree() {
-    // this is immedidate mode of OpenGL used prior to OpenGL 3.0
-    // draw trunk
+    // Draw trunk
     glColor3f(0.59f, 0.29f, 0.0f);
-    glBegin(GL_POLYGON);
-    glVertex2f(1.0f, 1.0f);
-    glVertex2f(1.0f, 4.0f);
-    glVertex2f(4.0f, 1.0f);
-    glVertex2f(4.0f, 4.0f);
+    glBegin(GL_QUADS);
+    glVertex2f(4.75f, 1.0f);
+    glVertex2f(4.75f, 2.5f);
+    glVertex2f(5.25f, 2.5f);
+    glVertex2f(5.25f, 1.0f);
     glEnd();
+
+    // Draw leaves
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glBegin(GL_TRIANGLES);
+    for (int i = 0; i < 7; i++) {
+        glVertex2f(0 + 
+    }
 
     //// draw turret
     //glColor3f(0.75f, 0.3f, 0.1f);
@@ -109,7 +115,7 @@ void reshape(int w, int h)
     //do an orthographic parallel projection, limited by screen/window size
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0, 5.0, 0.0, 5.0);
+    gluOrtho2D(0.0, 10.0, 0.0, 10.0);
     //gluOrtho2D(-5.0, 5.0, -5.0, 5.0);
 
     /* tell OpenGL to use the whole window for drawing */
