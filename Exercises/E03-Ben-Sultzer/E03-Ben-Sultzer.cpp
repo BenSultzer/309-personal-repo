@@ -8,17 +8,26 @@
 #include <GL/freeglut.h> //include glut for Windows
 #endif
 
+#include <cstdlib>
+#include <time.h>
 
-// the window's width and height
+// The window's width and height
 int width, height;
 
+/// <summary>
+/// Initialize non-OpenGL and GLUT members
+/// </summary>
+/// <param name="">Takes no parameters</param>
 void init(void)
 {
-    // initialize the size of the window
+    // Initialize the size of the window
     width = 600;
     height = 600;
 }
 
+/// <summary>
+/// Draws a Christmas tree using OpenGL primitive drawing functions
+/// </summary>
 void DrawTree() {
     // Draw trunk
     glColor3f(0.59f, 0.29f, 0.0f);
@@ -33,44 +42,30 @@ void DrawTree() {
     glColor3f(0.0f, 1.0f, 0.0f);
     glBegin(GL_TRIANGLES);
     for (int i = 0; i < 7; i++) {
-        glVertex2f(0 + 
+        // Seven triangles with a right base point at half-x coordinates between
+        // 5.0 and 10.0 and a left base point at half-x coordinates between 
+        // 0.0 and 5.0.
+        glVertex2f(1.0 + ((5.0 / 10.0) * i), 2.5 + ((5.0 / 10.0) * i));
+        glVertex2f(5.0f, 3.5 + ((5.0 / 10.0) * i));
+        glVertex2f(9.0 - ((5.0 / 10.0) * i), 2.5 + ((5.0 / 10.0) * i));
     }
+    glEnd();
 
-    //// draw turret
-    //glColor3f(0.75f, 0.3f, 0.1f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(4.35f, 4.25f);
-    //glVertex2f(4.35f, 5.75f);
-    //glVertex2f(5.65f, 4.25f);
-    //glVertex2f(5.65f, 5.75f);
-    //glEnd();
-    //
-    //// draw gun
-    //glColor3f(0.5f, 0.3f, 0.1f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(4.8f, 5.75f);
-    //glVertex2f(4.8f, 7.00f);
-    //glVertex2f(5.2f, 5.75f);
-    //glVertex2f(5.2f, 7.00f);
-    //glEnd();
-    //
-    //// draw left caterpillar tracks
-    //glColor3f(0.3f, 0.3f, 0.3f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(3.5f, 3.5f);
-    //glVertex2f(3.5f, 6.5f);
-    //glVertex2f(4.0f, 3.5f);
-    //glVertex2f(4.0f, 6.5f);
-    //glEnd();
-    //
-    //// draw right caterpillar tracks
-    //glColor3f(0.3f, 0.3f, 0.3f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(6.0f, 3.5f);
-    //glVertex2f(6.0f, 6.5f);
-    //glVertex2f(6.5f, 3.5f);
-    //glVertex2f(6.5f, 6.5f);
-    //glEnd();
+    // Draw ornanments
+    glPointSize(15.0f);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glBegin(GL_POINTS);
+    glVertex2f(4.0f, 3.0f);
+    glVertex2f(4.25f, 4.75f);
+    glVertex2f(6.5f, 3.0f);
+    glVertex2f(5.75f, 4.0f);
+    glVertex2f(5.15f, 5.75f);
+    glVertex2f(3.75f, 3.75f);
+    glVertex2f(4.85f, 3.75f);
+    glVertex2f(5.5f, 3.15f);
+    glVertex2f(3.25f, 3.25f);
+    glVertex2f(5.65f, 5.0f);
+    glEnd();
 }
 
 // called when the GL context need to be rendered
@@ -95,11 +90,7 @@ void display(void)
     // specify the color for new drawing
     glColor3f(0.0, 0.0, 1.0);
 
-    // draw the origin of the canvas
-    glPointSize(30.0f);
-    glBegin(GL_POINTS);
-    glVertex2f(0.0f, 0.0f);
-    glEnd();
+    // Reset the point size
     glPointSize(1.0f);
 
     glutSwapBuffers();
@@ -127,6 +118,9 @@ void reshape(int w, int h)
 
 int main(int argc, char* argv[])
 {
+    // Set the random number generator for random ornament colors
+    srand(time(0));
+
     // before create a glut window,
     // initialize stuff not opengl/glut dependent
     init();
