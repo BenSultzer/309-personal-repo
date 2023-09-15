@@ -157,10 +157,10 @@ int main(int argc, char* argv[])
     // Register function to handle window resizing
     glutReshapeFunc(reshape);
 
-    //register function that draws in the window
+    // Register function that draws in the window
     glutDisplayFunc(display);
 
-    //start the glut main loop
+    // Start the glut main loop
     glutMainLoop();
 
     return 0;
