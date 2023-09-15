@@ -8,9 +8,6 @@
 #include <GL/freeglut.h> //include glut for Windows
 #endif
 
-#include <cstdlib>
-#include <time.h>
-
 // The window's width and height
 int width, height;
 
@@ -61,7 +58,7 @@ void DrawTree() {
     }
     glEnd();
 
-    // Draw ornanments
+    // Draw ornaments
     glPointSize(15.0f);
     glColor3f(1.0f, 0.0f, 0.0f);
     glBegin(GL_POINTS);
@@ -89,7 +86,6 @@ void display(void)
 
     // Clear the buffer stored for drawing
     glClear(GL_COLOR_BUFFER_BIT);
-
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
