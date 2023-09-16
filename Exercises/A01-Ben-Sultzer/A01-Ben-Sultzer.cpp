@@ -1,6 +1,6 @@
 // Course: 		        IGME 309
 // Student Name: 	    Ben Sultzer
-// Friday Exercise: 	02
+// Assignment Number: 	01
 
 #ifdef __APPLE__
 #include <GLUT/glut.h> // include glut for Mac
@@ -8,9 +8,80 @@
 #include <GL/freeglut.h> //include glut for Windows
 #endif
 
+#include <math.h>
+
+using namespace std;
+
+// Define a value for pi
+const float PI = 3.14159;
+
+// The total number of vertices for a circle element
+int numVertices = 100;
 
 // the window's width and height
 int width, height;
+
+/// <summary>
+/// Draw a filled circle using GL_POLYGON
+/// </summary>
+/// <param name="red">The red value for the circle's color</param>
+/// <param name="green">The green value for the circle's color</param>
+/// <param name="blue">The blue value for the circle's color</param>
+/// <param name="center_x">The x-coordinate of the circle's center</param>
+/// <param name="center_y">The y-coordinate of the circle's center</param>
+/// <param name="radius">The radius of the circle</param>
+void drawFilledCircle(float red, float green, float blue, float center_x, float center_y, float radius) {
+    // Set the specified color
+    glColor3f(red, green, blue);
+
+    // Draw the circle
+    glBegin(GL_POLYGON);
+    for (int i = 0; i < numVertices; i++) {
+        // Get the current angle increment
+        float angle = -((2 * PI) / numVertices) * i;
+
+        // Calculate the x- and y-coordinates of the current vertex
+        float currentX = center_x + (radius * cos(angle));
+        float currentY = center_y + (radius * sin(angle));
+
+        // Create the vertex
+        glVertex2f(currentX, currentY);
+    }
+    glEnd();
+}
+
+/// <summary>
+/// Draw a wireframe circle with GL_LINE_LOOP
+/// </summary>
+/// <param name="red"></param>
+/// <param name="green"></param>
+/// <param name="blue"></param>
+/// <param name="center_x"></param>
+/// <param name="center_y"></param>
+/// <param name="radius"></param>
+/// <param name="lineWidth"></param>
+void drawWireframeCircle(float red, float green, float blue, float center_x, float center_y, float radius, float lineWidth) {
+    // Set the specified color
+    glColor3f(red, green, blue);
+
+    // Set the specified line width
+    glLineWidth(lineWidth);
+
+    // Draw the circle - FINISH CHECKING THIS WITH MATH.HWS.EDU SITE - REMOVE THIS COMMENT
+    glBegin(GL_LINE_LOOP);
+    for (int i = 0; i < numVertices; i++) {
+        // Get the current angle increment
+        float angle = -((2 * PI) / numVertices) * i;
+
+        // Calculate the x- and y-coordinates of the current vertex
+        float currentX = center_x + (radius * cos(angle));
+        float currentY = center_y + (radius * sin(angle));
+
+        // Create the vertex
+        glVertex2f(currentX, currentY);
+    }
+    glEnd();
+}
 
 void init(void)
 {
@@ -83,8 +154,7 @@ void display(void)
     // specify the color for drawing
     glColor3f(1.0, 0.0, 0.0);
 
-    // this is immedidate mode of OpenGL usded prior to OpenGL 3.0
-    DrawTank();
+    drawWireframeCircle(0.5f, 0.5f, 0.5f, 5.0f, 5.0f, 2.0f, 5.0f);
 
     // specify the color for new drawing
     glColor3f(0.0, 0.0, 1.0);
