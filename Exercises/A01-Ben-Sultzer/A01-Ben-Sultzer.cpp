@@ -67,7 +67,7 @@ void drawWireframeCircle(float red, float green, float blue, float center_x, flo
     // Set the specified line width
     glLineWidth(lineWidth);
 
-    // Draw the circle - FINISH CHECKING THIS WITH MATH.HWS.EDU SITE - REMOVE THIS COMMENT
+    // Draw the circle
     glBegin(GL_LINE_LOOP);
     for (int i = 0; i < numVertices; i++) {
         // Get the current angle increment
@@ -81,6 +81,9 @@ void drawWireframeCircle(float red, float green, float blue, float center_x, flo
         glVertex2f(currentX, currentY);
     }
     glEnd();
+
+    // Reset the line width
+    glLineWidth(1.0f);
 }
 
 void init(void)
