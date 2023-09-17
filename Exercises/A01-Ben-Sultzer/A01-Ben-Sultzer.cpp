@@ -15,10 +15,10 @@ using namespace std;
 // Define a value for pi
 const float PI = 3.14159;
 
-// The total number of vertices for a circle element
+// The total number of vertices for a circle
 int numVertices = 100;
 
-// the window's width and height
+// The window's width and height
 int width, height;
 
 /// <summary>
