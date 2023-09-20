@@ -38,7 +38,7 @@ void drawFilledCircle(float red, float green, float blue, float center_x, float 
     glBegin(GL_POLYGON);
     for (int i = 0; i < numVertices; i++) {
         // Get the current angle increment
-        float angle = -((2 * PI) / numVertices) * i;
+        float angle = ((2 * PI) / numVertices) * i;
 
         // Calculate the x- and y-coordinates of the current vertex
         float currentX = center_x + (radius * cos(angle));
@@ -71,7 +71,7 @@ void drawWireframeCircle(float red, float green, float blue, float center_x, flo
     glBegin(GL_LINE_LOOP);
     for (int i = 0; i < numVertices; i++) {
         // Get the current angle increment
-        float angle = -((2 * PI) / numVertices) * i;
+        float angle = ((2 * PI) / numVertices) * i;
 
         // Calculate the x- and y-coordinates of the current vertex
         float currentX = center_x + (radius * cos(angle));
@@ -157,7 +157,7 @@ void display(void)
     // specify the color for drawing
     glColor3f(1.0, 0.0, 0.0);
 
-    drawWireframeCircle(0.5f, 0.5f, 0.5f, 5.0f, 5.0f, 2.0f, 5.0f);
+    drawFilledCircle(0.5f, 0.5f, 0.5f, 5.0f, 5.0f, 2.0f);
 
     // specify the color for new drawing
     glColor3f(0.0, 0.0, 1.0);
