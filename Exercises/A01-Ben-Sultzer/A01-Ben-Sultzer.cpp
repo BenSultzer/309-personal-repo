@@ -9,6 +9,7 @@
 #endif
 
 #include <math.h>
+#include <iostream>
 
 using namespace std;
 
@@ -53,13 +54,13 @@ void drawFilledCircle(float red, float green, float blue, float center_x, float 
 /// <summary>
 /// Draw a wireframe circle with GL_LINE_LOOP
 /// </summary>
-/// <param name="red"></param>
-/// <param name="green"></param>
-/// <param name="blue"></param>
-/// <param name="center_x"></param>
-/// <param name="center_y"></param>
-/// <param name="radius"></param>
-/// <param name="lineWidth"></param>
+/// <param name="red">The red value for the circle's color</param>
+/// <param name="green">The green value for the circle's color</param>
+/// <param name="blue">The blue value for the circle's color</param>
+/// <param name="center_x">The x-component for the circle's center</param>
+/// <param name="center_y">The y-component for the circle's center</param>
+/// <param name="radius">The radius of the circle</param>
+/// <param name="lineWidth">The thickness of the circle</param>
 void drawWireframeCircle(float red, float green, float blue, float center_x, float center_y, float radius, float lineWidth) {
     // Set the specified color
     glColor3f(red, green, blue);
@@ -192,6 +193,27 @@ void reshape(int w, int h)
     glutPostRedisplay();
 }
 
+/// <summary>
+/// Handles keyboard input for dynamically increasing or decreasing the resolution
+/// of the character by increasing or decreasing the number of vertices 
+/// to draw per circle
+/// </summary>
+/// <param name="key">The key that was pressed</param>
+/// <param name="x">the x-coordinate of the mouse position at the time
+/// the key was pressed</param>
+/// <param name="y">The y-coordinate of the mouse position at the time
+/// the key was pressed</param>
+void keyboard(unsigned char key, int x, int y) {
+    if (key == GLUT_KEY_UP) {
+        numVertices++;
+    }
+    else if (key == GLUT_KEY_DOWN) {
+        numVertices--;
+    }
+
+    cout << numVertices << endl;
+}
+
 int main(int argc, char* argv[])
 {
     // before create a glut window,
@@ -219,6 +241,9 @@ int main(int argc, char* argv[])
 
     //register function that draws in the window
     glutDisplayFunc(display);
+
+    // Register function that handles keyboard input
+    glutKeyboardFunc(keyboard);
 
     //start the glut main loop
     glutMainLoop();
