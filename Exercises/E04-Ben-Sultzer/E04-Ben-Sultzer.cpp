@@ -1,5 +1,5 @@
-// Course: 		IGME 309
-// Student Name: 	Ben Sultzer
+// Course: 				IGME 309
+// Student Name: 		Ben Sultzer
 // Friday Exercise: 	04
 
 #ifdef __APPLE__
