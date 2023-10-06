@@ -1,3 +1,7 @@
+// Course:			IGME 309
+// Student Name:	Ben Sultzer
+// Friday Exercise: 05
+
 #include "MyMesh.h"
 #include <GL/freeglut.h>
 
@@ -27,13 +31,16 @@ MyMesh::~MyMesh()
 
 void MyMesh::load(char* fileName)
 {
+	// Store the number of vertices and triangles
 	vertNum = 0;
 	triNum = 0;
 
+	// Initialize the vertex, triangle index, and color arrays
 	vertices = new float[100 * 2];
 	indices = new unsigned int[100 * 3];
 	vertColors = new float[100 * 3];
 
+	// Create an input file stream
 	ifstream file;
 
 	// Open the file
@@ -47,18 +54,19 @@ void MyMesh::load(char* fileName)
 
 	/****************************************/
 	// Write your code below
-	// Indicate whether the current line is a vertex or a face
+	// Indicate whether the current line in the file is a vertex 
+	// or a face
 	bool isVertex = false;
 	bool isFace = false;
 
 	// Store the current shape data type character 
-	// in the file
+	// from the file
 	char shapeDataType;
 
-	// Store the current vertex component in the file
+	// Store the current vertex component from the file
 	float currentVertComp;
 
-	// Store the current triangle index in the file
+	// Store the current triangle index from the file
 	int currentTriVertexIndex;
 
 	// Counter for the vertices array
@@ -68,17 +76,19 @@ void MyMesh::load(char* fileName)
 	int currentTriIndex = 0;
 
 	// There will always be two vertex components, so reset
-	// the shape data type after two passes through the file
-	int vertexCompCoundown = 2;
+	// the shape data type after two passes through the file 
+	// getting vertex information
+	int vertexCompCountdown = 2;
 
 	// There will always be three triangle indices, so reset
 	// the shape data type after three passes through the file
+	// getting triangle index information
 	int triangleVertIndexCountdown = 3;
 
 	// Extract the vertices and indices from the file
-	while (file.peek() != EOF) {
+	while (file.peek() != EOF) {  // We have not reached the end of the file yet
 		// Determine what kind of data the current line is
-		// (don't know if its a vertex or a face)
+		// (don't know if it's a vertex or a face)
 		if (!isVertex && !isFace) {
 			file >> shapeDataType;
 
@@ -96,46 +106,42 @@ void MyMesh::load(char* fileName)
 		// If the current line is a vertex, store the current 
 		// vertex component
 		else if (isVertex) {
-			// There are still more vertex components to process
-			if (vertexCompCoundown > 0) {
-				file >> currentVertComp;
+			file >> currentVertComp;
 
-				// Assign the vertex component
-				// to the proper index in the vertices array and increment the 
-				// vertices array counter for the next component
-				vertices[currentVertIndex] = currentVertComp;
-				currentVertIndex++;
+			// Assign the vertex component to the proper index in 
+			// the vertices array and increment the vertices array 
+			// counter for the next component
+			vertices[currentVertIndex] = currentVertComp;
+			currentVertIndex++;
 
-				// Decrement the vertex countdown
-				vertexCompCoundown--;
-			}
-			// If all vertex components have been processed, reset the
-			// vertex countdown and the shape data type
-			else {
-				vertexCompCoundown = 2;
+			// Decrement the vertex countdown
+			vertexCompCountdown--;
+
+			// If all vertex components have been processed for the current
+			// line, reset the vertex countdown and the shape data type
+			if (vertexCompCountdown <= 0) {
+				vertexCompCountdown = 2;
 				isVertex = false;
 			}
 		}
 		// if the current line is a face, store the current
 		// vertex index
 		else if (isFace) {
-			// There are still more triangle vertex indices to be processed
-			if (triangleVertIndexCountdown > 0) {
-				file >> currentTriVertexIndex;
+			file >> currentTriVertexIndex;
 
-				// Assign the vertex index
-				// to the proper index in the triangle (indices) array, 
-				// and increment the triangle array counter for the next 
-				// vertex index
-				indices[currentTriIndex] = currentTriVertexIndex - 1;
-				currentTriIndex++;
+			// Assign the vertex index to the proper index in the 
+			// triangle (indices) array, and increment the triangle 
+			// array counter for the next vertex index
+			indices[currentTriIndex] = currentTriVertexIndex - 1;
+			currentTriIndex++;
 
-				// Decrement the triangle vertex index countdown
-				triangleVertIndexCountdown--;
-			}
-			// If all triangle vertex indices have been processed, reset the
-			// triangle vertex index countdown and the shape data type
-			else {
+			// Decrement the vertex index countdown
+			triangleVertIndexCountdown--;
+			
+			// If all vertex indices have been processed for the current 
+			// line, reset the vertex index countdown and the 
+			// shape data type
+			if (triangleVertIndexCountdown <= 0) {
 				triangleVertIndexCountdown = 3;
 				isFace = false;
 			}

@@ -1,3 +1,6 @@
+// Course:			IGME 309
+// Student Name:	Ben Sultzer
+// Friday Exercise: 05
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -19,7 +22,7 @@ MyMesh g_mesh = MyMesh();
 void init(void)
 {
 	// load the mesh data to g_mesh
-	char fileName[10] = { "data1.obj" };
+	char fileName[10] = { "data2.obj" };
 
 	g_mesh.load(fileName);
 }

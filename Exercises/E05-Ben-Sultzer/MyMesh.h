@@ -1,4 +1,7 @@
 #pragma once
+// Course:			IGME 309
+// Student Name:	Ben Sultzer
+// Friday Exercise: 05
 
 class MyMesh
 {
