@@ -30,7 +30,6 @@ void PolyObject::addVertex(vec2 p_vert)
 	vertices.push_back(p_vert);
 }
 
-// CHECK THIS FUNCTION
 /// <summary>
 /// Set the color of the current PolyObject
 /// </summary>
@@ -40,9 +39,14 @@ void PolyObject::setColor(vec3 p_color)
 	glColor3f(p_color.x, p_color.y, p_color.z);
 }
 
+/// <summary>
+/// Returns the number of vertices in this PolyObject
+/// </summary>
+/// <returns>The number of vertices in this 
+/// PolyObject</returns>
 unsigned int PolyObject::getVertNum()
 {
-	return 0;
+	return vertices.size();
 }
 
 /// <summary>
