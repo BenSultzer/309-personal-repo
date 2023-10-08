@@ -26,6 +26,10 @@ bool doneDrawing;
 // The list of completed PolyObjects
 vector<PolyObject> polyObjects;
 
+// Mouse postion vector
+vec2 mousePosVector;
+
+// The mouse position array
 float mousePos[2];
 
 void init(void)
@@ -62,19 +66,20 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    if (numOfVertices > 0 && numOfVertices < 3) {
+    // Draw the PolyObject dynamically if the user is not done
+    // drawing, otherwise draw the completed PolyObject
+    if (!doneDrawing) {
+        // Create a vec2 out of the mouse postion for drawing the
+        // completed PolyObject
+        mousePosVector = vec2(mousePos[0], mousePos[1]);
 
-        glBegin(GL_LINE_STRIP);
-        for (int i = 0; i < numOfVertices; i++)
-            glVertex2fv(v + i * 2);
-        glVertex2fv(mousePos);
-        glEnd();
+        currentPolyObj->draw(mousePosVector);
     }
-    else if (numOfVertices == 3) {
-        glBegin(GL_TRIANGLES);
-        for (int i = 0; i < numOfVertices; i++)
-            glVertex2fv(v + i * 2);
-        glEnd();
+    else {
+        currentPolyObj->draw();
+
+        // Reset the done drawing flag
+        doneDrawing = false;
     }
 
     drawCursor();
@@ -144,6 +149,7 @@ void motion(int x, int y)
 /// time the key was pressed</param>
 void keyboard(unsigned char key, int x, int y)
 {
+    cout << key << endl;
     // Drawing is done when the user clicks the "ENTER" key
     switch (key) {
     case '\n':
@@ -156,6 +162,8 @@ void keyboard(unsigned char key, int x, int y)
         currentPolyObj = new PolyObject();
         break;
     }
+
+    glutPostRedisplay();
 }
 
 void menu(int value)
