@@ -1,3 +1,7 @@
+// Course:              IGME 309
+// Student Name:        Ben Sultzer
+// Assignment Number:   02
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -36,7 +40,7 @@ void PolyObject::addVertex(vec2 p_vert)
 /// <param name="p_color">The new color</param>
 void PolyObject::setColor(vec3 p_color)
 {
-	glColor3f(p_color.x, p_color.y, p_color.z);
+	color = p_color;
 }
 
 /// <summary>
@@ -54,6 +58,9 @@ unsigned int PolyObject::getVertNum()
 /// </summary>
 void PolyObject::draw()
 {
+	// Set the color for the current PolyObject
+	glColor3f(color.x, color.y, color.z);
+
 	// The PolyObject contains one vertex
 	if (getVertNum() == 1) {
 		glBegin(GL_POINTS);
@@ -84,6 +91,9 @@ void PolyObject::draw()
 /// (it will be drawn as well)</param>
 void PolyObject::draw(vec2 p_mousePos)
 {
+	// Set the color for the current PolyObject
+	glColor3f(color.x, color.y, color.z);
+
 	// The PolyObject currently has one vertex
 	if (getVertNum() == 1) {
 		glBegin(GL_LINES);

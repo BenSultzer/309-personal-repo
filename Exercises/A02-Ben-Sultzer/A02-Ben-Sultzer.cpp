@@ -1,3 +1,7 @@
+// Course:              IGME 309
+// Student Name:        Ben Sultzer
+// Assignment Number:   02
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -29,6 +33,9 @@ vector<PolyObject> polyObjects;
 // Mouse postion vector
 vec2 mousePosVector;
 
+// The color to change to during or before drawing
+vec3 colorVector;
+
 // The mouse position array
 float mousePos[2];
 
@@ -39,6 +46,9 @@ void init(void)
 
     // Initialize the drawing completion Boolean
     doneDrawing = false;
+
+    // Initialize the color vector
+    colorVector = vec3(1.0f, 0.0f, 0.0f);
 
     for (int i = 0; i < 6; i++)
         v[i] = 0.0f;
@@ -66,6 +76,14 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    // Draw all the previously made PolyObjects
+    for (int i = 0; i < polyObjects.size(); i++) {
+        polyObjects[i].draw();
+    }
+
+    // Set the drawing color
+    currentPolyObj->setColor(colorVector);
+
     // Draw the PolyObject dynamically if the user is not done
     // drawing, otherwise draw the completed PolyObject
     if (!doneDrawing) {
@@ -82,7 +100,9 @@ void display(void)
         doneDrawing = false;
     }
 
+    // Draw the cursor
     drawCursor();
+
     glutSwapBuffers();
 }
 
@@ -149,10 +169,9 @@ void motion(int x, int y)
 /// time the key was pressed</param>
 void keyboard(unsigned char key, int x, int y)
 {
-    cout << key << endl;
     // Drawing is done when the user clicks the "ENTER" key
     switch (key) {
-    case '\n':
+    case 13:
         doneDrawing = true;
 
         // Add the completed PolyObject to the PolyObject list
@@ -166,37 +185,42 @@ void keyboard(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
+/// <summary>
+/// Defines the functionality of the various menu options
+/// </summary>
+/// <param name="value">The menu option that was 
+/// selected</param>
 void menu(int value)
 {
     switch (value) {
-    case 0: // clear
-        numOfVertices = 0;
+    // Clears all of the PolyObjects
+    case 0:
+        polyObjects.clear();
         glutPostRedisplay();
         break;
-    case 1: //exit
+    // Quits the program
+    case 1:
         exit(0);
-    case 2: // red
-        color[0] = 1.0f;
-        color[1] = 0.0f;
-        color[2] = 0.0f;
+    // Changes the drawing color to red for the current PolyObject
+    case 2:
+        colorVector = vec3(1.0f, 0.0f, 0.0f);
         glutPostRedisplay();
         break;
-    case 3: // green
-        color[0] = 0.0f;
-        color[1] = 1.0f;
-        color[2] = 0.0f;
+    // Changes the drawing color to green for the current PolyObject
+    case 3:
+        colorVector = vec3(0.0f, 1.0f, 0.0f);
         glutPostRedisplay();
         break;
-    case 4: // blue
-        color[0] = 0.0f;
-        color[1] = 0.0f;
-        color[2] = 1.0f;
+    // Changes the drawing color to blue for the current PolyObject
+    case 4:
+        colorVector = vec3(0.0f, 0.0f, 1.0f);
         glutPostRedisplay();
         break;
     default:
         break;
     }
 }
+
 void createMenu()
 {
     int colorMenu = glutCreateMenu(menu);
@@ -217,7 +241,7 @@ int main(int argc, char* argv[])
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(rasterSize[0], rasterSize[1]);
-    glutCreateWindow("Mouse Event - draw a triangle");
+    glutCreateWindow("A02-Ben-Sultzer");
 
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
