@@ -16,9 +16,7 @@ using namespace std;
 float canvasSize[] = { 10.0f, 10.0f };
 int rasterSize[] = { 800, 600 };
 
-// structure for storing 3 2D vertices of a triangle
-int numOfVertices = 0;
-float v[2 * 3];
+// The default color
 float color[3];
 
 // The PolyObject currently being drawn
@@ -50,8 +48,8 @@ void init(void)
     // Initialize the color vector
     colorVector = vec3(1.0f, 0.0f, 0.0f);
 
-    for (int i = 0; i < 6; i++)
-        v[i] = 0.0f;
+    // Initialize the mouse position array and default
+    // color
     mousePos[0] = mousePos[1] = 0.0f;
     color[0] = 1.0f;
     color[1] = color[2] = 0.0f;
