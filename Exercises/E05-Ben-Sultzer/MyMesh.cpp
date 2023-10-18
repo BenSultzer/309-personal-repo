@@ -55,7 +55,7 @@ void MyMesh::load(char* fileName)
 	/****************************************/
 	// Write your code below
 	// Indicate whether the current line in the file is a vertex 
-	// or a face
+	// or a face (a triangle)
 	bool isVertex = false;
 	bool isFace = false;
 
@@ -76,20 +76,21 @@ void MyMesh::load(char* fileName)
 	int currentTriIndex = 0;
 
 	// There will always be two vertex components, so reset
-	// the shape data type after two passes through the file 
+	// the shape data type after two passes through the file, 
 	// getting vertex information
 	int vertexCompCountdown = 2;
 
 	// There will always be three triangle indices, so reset
-	// the shape data type after three passes through the file
+	// the shape data type after three passes through the file,
 	// getting triangle index information
 	int triangleVertIndexCountdown = 3;
 
 	// Extract the vertices and indices from the file
 	while (file.peek() != EOF) {  // We have not reached the end of the file yet
 		// Determine what kind of data the current line is
-		// (don't know if it's a vertex or a face)
+		// (don't know if it's a vertex or a face yet)
 		if (!isVertex && !isFace) {
+			// Get the type of data
 			file >> shapeDataType;
 
 			// Indicate that the current line is a vertex
@@ -124,7 +125,7 @@ void MyMesh::load(char* fileName)
 				isVertex = false;
 			}
 		}
-		// if the current line is a face, store the current
+		// If the current line is a face, store the current
 		// vertex index
 		else if (isFace) {
 			file >> currentTriVertexIndex;
@@ -157,7 +158,7 @@ void MyMesh::load(char* fileName)
 	// Write your code above
 	/****************************************/
 
-	// generate random vertex colors
+	// Generate random vertex colors
 	for (unsigned int i = 0; i < vertNum; i++) {
 		vertColors[i * 3 + 0] = float(rand()) / (RAND_MAX + 1);
 		vertColors[i * 3 + 1] = float(rand()) / (RAND_MAX + 1);
