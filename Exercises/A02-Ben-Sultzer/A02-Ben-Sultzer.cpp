@@ -65,6 +65,11 @@ void drawCursor()
     glPointSize(1.0f);
 }
 
+/// <summary>
+/// Draws the previously created PolyObjects and either dynamically draws the current PolyObject
+/// or completes the current PolyObject's drawing, depending on whether or not the user is done drawing.
+/// </summary>
+/// <param name="void">This function takes no parameters</param>
 void display(void)
 {
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -167,7 +172,7 @@ void motion(int x, int y)
 /// time the key was pressed</param>
 void keyboard(unsigned char key, int x, int y)
 {
-    // Drawing is done when the user clicks the "ENTER" key
+    // Drawing is done when the user presses the "ENTER" key
     switch (key) {
     case 13:
         doneDrawing = true;
