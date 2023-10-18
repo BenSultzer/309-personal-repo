@@ -31,7 +31,7 @@ vector<PolyObject> polyObjects;
 // Mouse postion vector
 vec2 mousePosVector;
 
-// The color to change to during or before drawing
+// The color to which to change during or before drawing
 vec3 colorVector;
 
 // The mouse position array
@@ -72,6 +72,7 @@ void drawCursor()
 /// <param name="void">This function takes no parameters</param>
 void display(void)
 {
+    // Prepare the canvas
     glClearColor(1.0, 1.0, 1.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -88,15 +89,19 @@ void display(void)
     currentPolyObj->setColor(colorVector);
 
     // Draw the PolyObject dynamically if the user is not done
-    // drawing, otherwise draw the completed PolyObject
+    // drawing. Otherwise, draw the completed PolyObject
     if (!doneDrawing) {
-        // Create a vec2 out of the mouse postion for drawing the
-        // completed PolyObject
+        // Create a vec2 out of the mouse postion to pass to the draw
+        // function
         mousePosVector = vec2(mousePos[0], mousePos[1]);
 
+        // Draw the potential shape of the PolyObject with all the 
+        // previously placed vertices, and if the last vertex were to
+        // be the mouse position
         currentPolyObj->draw(mousePosVector);
     }
     else {
+        // Draw the finished PolyObject
         currentPolyObj->draw();
 
         // Reset the done drawing flag
@@ -123,11 +128,11 @@ void reshape(int w, int h)
 }
 
 /// <summary>
-/// Adds a new vertex to the current PolyObject, and redraws the screen
-/// to show the results, when the left mouse button is clicked
+/// Adds a new vertex to the current PolyObject when the left mouse button 
+/// is clicked, and redraws the screen to show the results
 /// </summary>
 /// <param name="button">Which button of the mouse was clicked</param>
-/// <param name="state">The state of the button press</param>
+/// <param name="state">The state of the button click</param>
 /// <param name="x">The Windows screen x-position of the mouse at the
 /// time the button was clicked</param>
 /// <param name="y">The Windows screen y-position of the mouse at the

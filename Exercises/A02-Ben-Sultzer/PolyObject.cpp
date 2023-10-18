@@ -15,6 +15,7 @@
 /// </summary>
 PolyObject::PolyObject()
 {
+	// Initialize the color member
 	color = vec3(0.0f, 0.0f, 0.0f);
 }
 
@@ -54,7 +55,7 @@ unsigned int PolyObject::getVertNum()
 }
 
 /// <summary>
-/// Draw the complete PolyObject to the screen
+/// Draw the finished PolyObject to the screen
 /// </summary>
 void PolyObject::draw()
 {
@@ -101,7 +102,7 @@ void PolyObject::draw(vec2 p_mousePos)
 		glVertex2f(p_mousePos.x, p_mousePos.y);
 		glEnd();
 	}
-	// The PolyObject has two or more vertices
+	// The PolyObject currently has two or more vertices
 	else if (getVertNum() >= 2) {
 		glBegin(GL_POLYGON);
 		for (int i = 0; i < getVertNum(); i++) {
