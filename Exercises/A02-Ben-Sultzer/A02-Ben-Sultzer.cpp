@@ -152,7 +152,6 @@ void mouse(int button, int state, int x, int y)
         // Add the vertex
         currentPolyObj->addVertex(mouseVertex);
 
-        // Redraw the screen
         glutPostRedisplay();
     }
 }
@@ -168,7 +167,7 @@ void motion(int x, int y)
 }
 
 /// <summary>
-/// Handles when a user is done drawing a PolyObject
+/// Handles when the user is done drawing a PolyObject
 /// </summary>
 /// <param name="key">The key that was pressed</param>
 /// <param name="x">The Windows screen x-position of the mouse at the
@@ -201,25 +200,29 @@ void keyboard(unsigned char key, int x, int y)
 void menu(int value)
 {
     switch (value) {
-    // Clears all of the PolyObjects
+    // 'Clear' menu option: Deletes all of the PolyObjects and creates 
+    // a clean canvas
     case 0:
         polyObjects.clear();
         glutPostRedisplay();
         break;
-    // Quits the program
+    // 'Exit' menu option: Quits the program
     case 1:
         exit(0);
-    // Changes the drawing color to red for the current PolyObject
+    // 'Colors->' > 'Red' menu option: Changes the drawing color to red 
+    // for the current PolyObject
     case 2:
         colorVector = vec3(1.0f, 0.0f, 0.0f);
         glutPostRedisplay();
         break;
-    // Changes the drawing color to green for the current PolyObject
+    // 'Colors->' > 'Green' menu option: Changes the drawing color to green 
+    // for the current PolyObject
     case 3:
         colorVector = vec3(0.0f, 1.0f, 0.0f);
         glutPostRedisplay();
         break;
-    // Changes the drawing color to blue for the current PolyObject
+    // 'Colors->' > 'Blue' menu option: Changes the drawing color to blue 
+    // for the current PolyObject
     case 4:
         colorVector = vec3(0.0f, 0.0f, 1.0f);
         glutPostRedisplay();
