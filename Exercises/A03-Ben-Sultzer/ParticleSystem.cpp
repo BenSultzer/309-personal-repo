@@ -22,7 +22,7 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		// Please add initializations for other arrays as you see appropriate.
 		// Initialize the initial positions for each particle randomly placed within the grid
 		// around the origin
-		positions[i * 3] = getRandomValue(-10.0f, 10.0f);
+		positions[i * 3] = getRandomValue(-10.0f, 10.0f); // STOPPED HERE WITH SETTING POSITIONS
 		positions[i * 3 + 1] = getRandomValue(25.0f, 50.0f);
 		positions[i * 3 + 2] = getRandomValue(25.0f, 50.0f);
 
