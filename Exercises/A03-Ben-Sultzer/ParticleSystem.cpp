@@ -74,12 +74,21 @@ void ParticleSystem::update(float deltaTime)
 			// Update the particle's lifetime
 			lifeTimes[i] += deltaTime;
 
+			// Update the particle's velocity
+			velocities[i * 3] += acceleration[0] * deltaTime;
+			velocities[i * 3 + 1] += acceleration[1] * deltaTime;
+			velocities[i * 3 + 2] += acceleration[2] * deltaTime;
+
 			// Update the particle's position
-			positions[i * 3] += velocities[i * 3]
-			positions[i * 3 + 1] += velocities[i * 3 + 1]
-			positions[i * 3 + 2]  += velocities[i * 3 + 2]
-		}
-		
+			positions[i * 3] += velocities[i * 3];
+			positions[i * 3 + 1] += velocities[i * 3 + 1];
+			positions[i * 3 + 2] += velocities[i * 3 + 2];
+
+			// Scale the particle color's transparency value (every fourth element 
+			// of the colors array) by how long it's been alive (closer to end of
+			// living period means more transparency)
+			colors[i * 4 + 3] -= lifeTimes[i] / maxLifeTime;
+		}		
 		// Write your code above
 		/***************************/
 	}
