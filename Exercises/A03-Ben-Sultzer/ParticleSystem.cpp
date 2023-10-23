@@ -99,7 +99,13 @@ void ParticleSystem::draw()
 	/***************************/
 	// Write your code below
 	// Use GL_POINTS for rendering
-	
+	// Set the point size
+	glPointSize(3.0f);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, positions);
+	glDrawArrays(GL_POINTS, 0, numParticles * 3);
+	glDisableClientState(GL_VERTEX_ARRAY);	
 	// Write your code above
 	/***************************/
 }
