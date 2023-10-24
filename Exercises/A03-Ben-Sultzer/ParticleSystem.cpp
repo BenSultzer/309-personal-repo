@@ -33,8 +33,8 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		velocities[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
 
 		// Initialize the initial colors of the particles to an orange red with 0% transparency
-		colors[i * 4] = 255.0f;
-		colors[i * 4 + 1] = 89.0f;
+		colors[i * 4] = 1.0f;
+		colors[i * 4 + 1] = 0.35f;
 		colors[i * 4 + 2] = 0.0f;
 		colors[i * 4 + 3] = 1.0f;
 		/***************************/
@@ -87,7 +87,7 @@ void ParticleSystem::update(float deltaTime)
 			// Scale the particle color's transparency value (every fourth element 
 			// of the colors array) by how long it's been alive (closer to end of
 			// living period means more transparency)
-			colors[i * 4 + 3] -= lifeTimes[i] / maxLifeTime;
+			colors[i * 4 + 3] -= (lifeTimes[i] / maxLifeTime) * deltaTime;
 		}		
 		// Write your code above
 		/***************************/
@@ -102,10 +102,14 @@ void ParticleSystem::draw()
 	// Set the point size
 	glPointSize(3.0f);
 
+	// Draw with Vertex Array
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, positions);
-	glDrawArrays(GL_POINTS, 0, numParticles * 3);
+	glDrawArrays(GL_POINTS, 0, numParticles);
 	glDisableClientState(GL_VERTEX_ARRAY);	
+
+	// Reset the point size
+	glPointSize(1.0f);
 	// Write your code above
 	/***************************/
 }
