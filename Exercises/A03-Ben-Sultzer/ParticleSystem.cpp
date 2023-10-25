@@ -2,6 +2,9 @@
 #include <GL/freeglut.h>
 #include "ParticleSystem.h"
 #include <iostream>
+#include <math.h>
+
+#define PI 3.14159
 
 ParticleSystem::ParticleSystem(int _numParticles)
 {
@@ -22,14 +25,14 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		// Please add initializations for other arrays as you see appropriate.
 		// Initialize the initial positions for each particle, randomly placing them around
 		// the origin with varying starting heights and distances from the center
-		positions[i * 3] = getRandomValue(-10.0f, 10.0f);
+		positions[i * 3] = cos(getRandomValue(0.0f, 2 * PI));
 		positions[i * 3 + 1] = getRandomValue(0.0f, 5.0f);
-		positions[i * 3 + 2] = getRandomValue(-10.0f, 10.0f);
+		positions[i * 3 + 2] = sin(getRandomValue(0.0f, 2 * PI));
 
 		// Initialize the initial velocities to random values between 25 and 50 for
 		// each component
 		velocities[i * 3] = getRandomValue(-5.0f, 5.0f);
-		velocities[i * 3 + 1] = getRandomValue(10.0f, 20.0f);
+		velocities[i * 3 + 1] = getRandomValue(5.0f, 10.0f);
 		velocities[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
 
 		// Initialize the initial colors of the particles to an orange red with 0% transparency
@@ -50,23 +53,23 @@ void ParticleSystem::update(float deltaTime)
 		// Reset particle states (positions, velocities, colors, and lifetimes) when the lifetime reaches the maxLifeTime
 		// If the current particle has reached the end of its life, reset its velocity, position,
 		// color, and lifetime. Otherwise, updates its properties
-		if (lifeTimes[i] == maxLifeTime) {
+		if (lifeTimes[i] >= maxLifeTime) {
 			// Set the particle's new lifetime
 			lifeTimes[i] = maxLifeTime - maxLifeTime * i / numParticles;
 
 			// Set the particle's new position
-			positions[i * 3] = getRandomValue(-10.0f, 10.0f);
+			positions[i * 3] = cos(getRandomValue(0.0f, 2 * PI));
 			positions[i * 3 + 1] = getRandomValue(0.0f, 5.0f);
-			positions[i * 3 + 2] = getRandomValue(-10.0f, 10.0f);
+			positions[i * 3 + 2] = sin(getRandomValue(0.0f, 2 * PI));
 
 			// Set the particle's new velocity
 			velocities[i * 3] = getRandomValue(-5.0f, 5.0f);
-			velocities[i * 3 + 1] = getRandomValue(10.0f, 20.0f);
+			velocities[i * 3 + 1] = getRandomValue(5.0f, 10.0f);
 			velocities[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
 
 			// Set the particle's new color
-			colors[i * 4] = 255.0f;
-			colors[i * 4 + 1] = 89.0f;
+			colors[i * 4] = 1.0f;
+			colors[i * 4 + 1] = 0.35f;
 			colors[i * 4 + 2] = 0.0f;
 			colors[i * 4 + 3] = 1.0f;
 		}
@@ -80,9 +83,9 @@ void ParticleSystem::update(float deltaTime)
 			velocities[i * 3 + 2] += acceleration[2] * deltaTime;
 
 			// Update the particle's position
-			positions[i * 3] += velocities[i * 3];
-			positions[i * 3 + 1] += velocities[i * 3 + 1];
-			positions[i * 3 + 2] += velocities[i * 3 + 2];
+			positions[i * 3] += velocities[i * 3] * deltaTime;
+			positions[i * 3 + 1] += velocities[i * 3 + 1] * deltaTime;
+			positions[i * 3 + 2] += velocities[i * 3 + 2] * deltaTime;
 
 			// Scale the particle color's transparency value (every fourth element 
 			// of the colors array) by how long it's been alive (closer to end of
