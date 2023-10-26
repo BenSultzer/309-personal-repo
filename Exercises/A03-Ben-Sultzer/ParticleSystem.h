@@ -15,7 +15,7 @@ private:
 
 	int numParticles;		// Number of particles in the system
 
-	float acceleration[3] = { 1.8f, 1.0f, -1.5f }; // Gravity
+	float acceleration[3];  // Turbulence
 	float maxLifeTime = 5.0f;	// The maximum life time the particle could exsit
 	
 	// speed ranges
