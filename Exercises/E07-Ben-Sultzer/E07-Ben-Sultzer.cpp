@@ -1,3 +1,7 @@
+// Course:			IGME 309
+// Student Name:	Ben Sultzer
+// Friday Exercise: 05
+
 #include <GL/glew.h>
 
 #ifdef __APPLE__
