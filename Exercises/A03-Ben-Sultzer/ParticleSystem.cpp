@@ -10,14 +10,10 @@ ParticleSystem::ParticleSystem(int _numParticles)
 {
 	numParticles = _numParticles;	// Set the number of particles
 
-	// Initialize the accelerations - NEEDS TO BE AN ARRAY TO STORE INDIVIDUAL ACCELERATIONS FOR ALL PARTICLES
-	acceleration[0] = getRandomValue(-2.0f, 2.0f);
-	acceleration[1] = 1.0f;
-	acceleration[2] = getRandomValue(-2.0f, 2.0f);
-
-	// Allocate memory for positions, velocities, colors, and lifetimes.
+	// Allocate memory for positions, velocities, accelerations, colors, and lifetimes.
 	positions = new float[numParticles * 3];
 	velocities = new float[numParticles * 3];
+	accelerations = new float[numParticles * 3];
 	colors = new float[numParticles * 4];	
 	lifeTimes = new float[numParticles];
 
@@ -34,11 +30,17 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		positions[i * 3 + 1] = getRandomValue(0.0f, 5.0f);
 		positions[i * 3 + 2] = 3.0f * sin(getRandomValue(0, 2 * PI));
 
-		// Initialize the initial velocities to random values between 25 and 50 for
-		// each component
+		// Initialize the initial velocities to random values between -5 and 5 for the x- and
+		// z- components, and 5 and 10 for the y-component
 		velocities[i * 3] = getRandomValue(-5.0f, 5.0f);
 		velocities[i * 3 + 1] = getRandomValue(5.0f, 10.0f);
 		velocities[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
+
+		// Initialize the initial accelerations to random values between -2 and 2 for the
+		// x- and z-components and a constant acceleration of 1 for the y-component
+		accelerations[i * 3] = getRandomValue(-2.0f, 2.0f);
+		accelerations[i * 3 + 1] = 1.0f;
+		accelerations[i * 3 + 2] = getRandomValue(-2.0f, 2.0f);
 
 		// Initialize the initial colors of the particles to an orange red with 0% transparency
 		colors[i * 4] = 1.0f;
@@ -55,10 +57,10 @@ void ParticleSystem::update(float deltaTime)
 		/***************************/
 		// Write your code below
 		// Update lifetime, velocity, position, and color.
-		// Reset particle states (acceleration (turbulence), positions, velocities, colors, and lifetimes) when the lifetime reaches the maxLifeTime
-		// If the current particle has reached the end of its life, reset its acceleration (turbulence), velocity, position,
-		// color, and lifetime. Otherwise, update its properties (except acceleration, which should remain constant
-		// throughout the particle's life)
+		// Reset particle states (acceleration (turbulence), positions, velocities, colors, and lifetimes) when the lifetime 
+		// reaches the maxLifeTime. If the current particle has reached the end of its life, reset its acceleration 
+		// (turbulence), velocity, position, color, and lifetime. Otherwise, update its properties (except acceleration, 
+		// which should remain constant throughout the particle's life)
 		if (lifeTimes[i] >= maxLifeTime) {
 			// Set the particle's new lifetime
 			lifeTimes[i] = maxLifeTime - maxLifeTime * i / numParticles;
@@ -73,6 +75,11 @@ void ParticleSystem::update(float deltaTime)
 			velocities[i * 3 + 1] = getRandomValue(5.0f, 10.0f);
 			velocities[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
 
+			// Set the particle's new acceleration
+			accelerations[i * 3] = getRandomValue(-2.0f, 2.0f);
+			accelerations[i * 3 + 1] = 1.0f;
+			accelerations[i * 3 + 2] = getRandomValue(-2.0f, 2.0f);
+
 			// Set the particle's new color
 			colors[i * 4] = 1.0f;
 			colors[i * 4 + 1] = 0.35f;
@@ -84,9 +91,9 @@ void ParticleSystem::update(float deltaTime)
 			lifeTimes[i] += deltaTime;
 
 			// Update the particle's velocity
-			velocities[i * 3] += acceleration[0] * deltaTime;
-			velocities[i * 3 + 1] += acceleration[1] * deltaTime;
-			velocities[i * 3 + 2] += acceleration[2] * deltaTime;
+			velocities[i * 3] += accelerations[i * 3] * deltaTime;
+			velocities[i * 3 + 1] += accelerations[i * 3 + 1] * deltaTime;
+			velocities[i * 3 + 2] += accelerations[i * 3 + 2] * deltaTime;
 
 			// Update the particle's position
 			positions[i * 3] += velocities[i * 3] * deltaTime;
@@ -97,7 +104,10 @@ void ParticleSystem::update(float deltaTime)
 			// of the colors array) by how long it's been alive (closer to end of
 			// living period means more transparency)
 			colors[i * 4 + 3] -= (lifeTimes[i] / maxLifeTime) * deltaTime;
-		}		
+		}
+
+		// Set the draw color for the current particle
+		glColor4f(colors[i * 4], colors[i * 4 + 1], colors[i * 4 + 2], colors[i * 4 + 3]);
 		// Write your code above
 		/***************************/
 	}
