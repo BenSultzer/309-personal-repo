@@ -4,6 +4,7 @@
 #include <iostream>
 #include <math.h>
 
+// Define a value for pi
 #define PI 3.14159
 
 ParticleSystem::ParticleSystem(int _numParticles)
@@ -26,21 +27,21 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		// Please add initializations for other arrays as you see appropriate.
 		// Initialize the initial positions for each particle, randomly placing them around
 		// the origin with varying starting heights and distances from the center
-		positions[i * 3] = 3.0f * cos(getRandomValue(0, 2 * PI));
+		positions[i * 3] = getRandomValue(0.0f, 3.0f) * cos(((2 * PI) / numParticles) * i);
 		positions[i * 3 + 1] = getRandomValue(0.0f, 5.0f);
-		positions[i * 3 + 2] = 3.0f * sin(getRandomValue(0, 2 * PI));
+		positions[i * 3 + 2] = getRandomValue(0.0f, 3.0f) * sin(((2 * PI) / numParticles) * i);
 
-		// Initialize the initial velocities to random values between -5 and 5 for the x- and
-		// z- components, and 5 and 10 for the y-component
-		velocities[i * 3] = getRandomValue(-5.0f, 5.0f);
-		velocities[i * 3 + 1] = getRandomValue(5.0f, 10.0f);
-		velocities[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
+		// Initialize the initial velocities to random values between -1 and 1 for the x- and
+		// z- components, and 1 and 2 for the y-component
+		velocities[i * 3] = getRandomValue(-1.0f, 1.0f);
+		velocities[i * 3 + 1] = getRandomValue(1.0f, 2.0f);
+		velocities[i * 3 + 2] = getRandomValue(-1.0f, 1.0f);
 
-		// Initialize the initial accelerations to random values between -2 and 2 for the
-		// x- and z-components and a constant acceleration of 1 for the y-component
-		accelerations[i * 3] = getRandomValue(-2.0f, 2.0f);
-		accelerations[i * 3 + 1] = 1.0f;
-		accelerations[i * 3 + 2] = getRandomValue(-2.0f, 2.0f);
+		// Initialize the initial accelerations to random values between -0.5 and 0.5 for the
+		// x- and z-components and a constant acceleration of 0.25 for the y-component
+		accelerations[i * 3] = getRandomValue(-0.5f, 0.5f);
+		accelerations[i * 3 + 1] = 0.25f;
+		accelerations[i * 3 + 2] = getRandomValue(-0.5f, 0.5f);
 
 		// Initialize the initial colors of the particles to an orange red with 0% transparency
 		colors[i * 4] = 1.0f;
@@ -71,14 +72,14 @@ void ParticleSystem::update(float deltaTime)
 			positions[i * 3 + 2] = 3.0f * sin(getRandomValue(0, 2 * PI));
 
 			// Set the particle's new velocity
-			velocities[i * 3] = getRandomValue(-5.0f, 5.0f);
-			velocities[i * 3 + 1] = getRandomValue(5.0f, 10.0f);
-			velocities[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
+			velocities[i * 3] = getRandomValue(-1.0f, 1.0f);
+			velocities[i * 3 + 1] = getRandomValue(1.0f, 2.0f);
+			velocities[i * 3 + 2] = getRandomValue(-1.0f, 1.0f);
 
 			// Set the particle's new acceleration
-			accelerations[i * 3] = getRandomValue(-2.0f, 2.0f);
-			accelerations[i * 3 + 1] = 1.0f;
-			accelerations[i * 3 + 2] = getRandomValue(-2.0f, 2.0f);
+			accelerations[i * 3] = getRandomValue(-0.5f, 0.5f);
+			accelerations[i * 3 + 1] = 0.25f;
+			accelerations[i * 3 + 2] = getRandomValue(-0.5f, 0.5f);
 
 			// Set the particle's new color
 			colors[i * 4] = 1.0f;
@@ -107,7 +108,7 @@ void ParticleSystem::update(float deltaTime)
 		}
 
 		// Set the draw color for the current particle
-		glColor4f(colors[i * 4], colors[i * 4 + 1], colors[i * 4 + 2], colors[i * 4 + 3]);
+		//glColor4f(colors[i * 4], colors[i * 4 + 1], colors[i * 4 + 2], colors[i * 4 + 3]);
 		// Write your code above
 		/***************************/
 	}
