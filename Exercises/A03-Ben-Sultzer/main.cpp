@@ -100,6 +100,12 @@ void display()
 	glMatrixMode(GL_MODELVIEW);
 	g_particles.draw();
 
+	glPointSize(3.0f);
+	glBegin(GL_POINTS);
+	glVertex3f(2.0f, 0.0f, 1.0f);
+	glEnd();
+	glPointSize(1.0f);
+
 	g_cam.drawGrid();
 
 	// display the text

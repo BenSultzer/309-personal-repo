@@ -27,9 +27,9 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		// Please add initializations for other arrays as you see appropriate.
 		// Initialize the initial positions for each particle, randomly placing them around
 		// the origin with varying starting heights and distances from the center
-		positions[i * 3] = getRandomValue(-10.0f, 10.0f) * cos(((2 * PI) / numParticles) * i);
+		positions[i * 3] = getRandomValue(-3.0f, 3.0f) * cos(((2 * PI) / numParticles) * i);
 		positions[i * 3 + 1] = getRandomValue(0.0f, 1.0f);
-		positions[i * 3 + 2] = getRandomValue(-10.0f, 10.0f) * sin(((2 * PI) / numParticles) * i);
+		positions[i * 3 + 2] = getRandomValue(-3.0f, 3.0f) * sin(((2 * PI) / numParticles) * i);
 
 		// Initialize the initial velocities to random values between -1 and 1 for the x- and
 		// z- components, and 1 and 2 for the y-component
@@ -43,9 +43,9 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		accelerations[i * 3 + 1] = 0.25f;
 		accelerations[i * 3 + 2] = getRandomValue(-0.5f, 0.5f);
 
-		// Initialize the initial colors of the particles to an orange red with 0% transparency
+		// Initialize the initial colors of the particles to red with 0% transparency
 		colors[i * 4] = 1.0f;
-		colors[i * 4 + 1] = 0.35f;
+		colors[i * 4 + 1] = 0.0f;
 		colors[i * 4 + 2] = 0.0f;
 		colors[i * 4 + 3] = 1.0f;
 		/***************************/
@@ -67,9 +67,9 @@ void ParticleSystem::update(float deltaTime)
 			lifeTimes[i] = maxLifeTime - maxLifeTime * i / numParticles;
 
 			// Set the particle's new position
-			positions[i * 3] = getRandomValue(-10.0f, 10.0f) * cos(((2 * PI) / numParticles) * i);
+			positions[i * 3] = getRandomValue(-3.0f, 3.0f) * cos(((2 * PI) / numParticles) * i);
 			positions[i * 3 + 1] = getRandomValue(0.0f, 1.0f);
-			positions[i * 3 + 2] = getRandomValue(-10.0f, 10.0f) * sin(((2 * PI) / numParticles) * i);
+			positions[i * 3 + 2] = getRandomValue(-3.0f, 3.0f) * sin(((2 * PI) / numParticles) * i);
 
 			// Set the particle's new velocity
 			velocities[i * 3] = getRandomValue(-1.0f, 1.0f);
@@ -83,7 +83,7 @@ void ParticleSystem::update(float deltaTime)
 
 			// Set the particle's new color
 			colors[i * 4] = 1.0f;
-			colors[i * 4 + 1] = 0.35f;
+			colors[i * 4 + 1] = 0.0f;
 			colors[i * 4 + 2] = 0.0f;
 			colors[i * 4 + 3] = 1.0f;
 		}
@@ -101,9 +101,10 @@ void ParticleSystem::update(float deltaTime)
 			positions[i * 3 + 1] += velocities[i * 3 + 1] * deltaTime;
 			positions[i * 3 + 2] += velocities[i * 3 + 2] * deltaTime;
 
-			// Scale the particle color's transparency value (every fourth element 
-			// of the colors array) by how long it's been alive (closer to end of
-			// living period means more transparency)
+			// Scale the particle color's transparency value down and green value up (every second 
+			// and fourth elements of the colors array) by how long the particle has been alive 
+			// (closer to end of living period means more transparency and more green) CHECK THIS COMMENT!!!
+			colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
 			colors[i * 4 + 3] -= (lifeTimes[i] / maxLifeTime) * deltaTime;
 		}
 
