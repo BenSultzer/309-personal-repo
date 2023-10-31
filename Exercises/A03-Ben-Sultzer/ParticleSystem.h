@@ -16,7 +16,7 @@ private:
 	int numParticles;		// Number of particles in the system
 
 	GLfloat* accelerations;  // holds particle turbulences in the format (x, y, z)
-	float maxLifeTime = 5.0f;	// The maximum life time the particle could exsit
+	float maxLifeTime = 10.0f;	// The maximum life time the particle could exsit
 	
 	// speed ranges
 	float minSpeedX = -5.0f;

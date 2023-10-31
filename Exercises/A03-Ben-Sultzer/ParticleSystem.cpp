@@ -27,9 +27,9 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		// Please add initializations for other arrays as you see appropriate.
 		// Initialize the initial positions for each particle, randomly placing them around
 		// the origin with varying starting heights and distances from the center
-		positions[i * 3] = getRandomValue(0.0f, 3.0f) * cos(((2 * PI) / numParticles) * i);
-		positions[i * 3 + 1] = getRandomValue(0.0f, 5.0f);
-		positions[i * 3 + 2] = getRandomValue(0.0f, 3.0f) * sin(((2 * PI) / numParticles) * i);
+		positions[i * 3] = getRandomValue(-10.0f, 10.0f) * cos(((2 * PI) / numParticles) * i);
+		positions[i * 3 + 1] = getRandomValue(0.0f, 1.0f);
+		positions[i * 3 + 2] = getRandomValue(-10.0f, 10.0f) * sin(((2 * PI) / numParticles) * i);
 
 		// Initialize the initial velocities to random values between -1 and 1 for the x- and
 		// z- components, and 1 and 2 for the y-component
@@ -67,9 +67,9 @@ void ParticleSystem::update(float deltaTime)
 			lifeTimes[i] = maxLifeTime - maxLifeTime * i / numParticles;
 
 			// Set the particle's new position
-			positions[i * 3] = 3.0f * cos(getRandomValue(0, 2 * PI));
-			positions[i * 3 + 1] = getRandomValue(0.0f, 5.0f);
-			positions[i * 3 + 2] = 3.0f * sin(getRandomValue(0, 2 * PI));
+			positions[i * 3] = getRandomValue(-10.0f, 10.0f) * cos(((2 * PI) / numParticles) * i);
+			positions[i * 3 + 1] = getRandomValue(0.0f, 1.0f);
+			positions[i * 3 + 2] = getRandomValue(-10.0f, 10.0f) * sin(((2 * PI) / numParticles) * i);
 
 			// Set the particle's new velocity
 			velocities[i * 3] = getRandomValue(-1.0f, 1.0f);
@@ -107,8 +107,6 @@ void ParticleSystem::update(float deltaTime)
 			colors[i * 4 + 3] -= (lifeTimes[i] / maxLifeTime) * deltaTime;
 		}
 
-		// Set the draw color for the current particle
-		//glColor4f(colors[i * 4], colors[i * 4 + 1], colors[i * 4 + 2], colors[i * 4 + 3]);
 		// Write your code above
 		/***************************/
 	}
@@ -122,11 +120,15 @@ void ParticleSystem::draw()
 	// Set the point size
 	glPointSize(3.0f);
 
+	// Set the colors with Color Array
+	glEnableClientState(GL_COLOR_ARRAY);
 	// Draw with Vertex Array
 	glEnableClientState(GL_VERTEX_ARRAY);
+	glColorPointer(4, GL_FLOAT, 0, colors);
 	glVertexPointer(3, GL_FLOAT, 0, positions);
 	glDrawArrays(GL_POINTS, 0, numParticles);
 	glDisableClientState(GL_VERTEX_ARRAY);	
+	glDisableClientState(GL_COLOR_ARRAY);
 
 	// Reset the point size
 	glPointSize(1.0f);
