@@ -26,6 +26,9 @@ private:
 	float minSpeedZ = -5.0f;
 	float maxSpeedZ = 5.0f;
 
+	// Flag of whether or not to transition color to grey (for smoke)
+	bool smokeFlag;
+
 public:
 	ParticleSystem(int _numParticles);	
 	void update(float deltaTime);

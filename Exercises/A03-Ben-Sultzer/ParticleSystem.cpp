@@ -10,6 +10,7 @@
 ParticleSystem::ParticleSystem(int _numParticles)
 {
 	numParticles = _numParticles;	// Set the number of particles
+	smokeFlag = false;				// Set whether or not smoke should begin
 
 	// Allocate memory for positions, velocities, accelerations, colors, and lifetimes.
 	positions = new float[numParticles * 3];
@@ -27,9 +28,9 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		// Please add initializations for other arrays as you see appropriate.
 		// Initialize the initial positions for each particle, randomly placing them around
 		// the origin with varying starting heights and distances from the center
-		positions[i * 3] = getRandomValue(-3.0f, 3.0f) * cos(((2 * PI) / numParticles) * i);
-		positions[i * 3 + 1] = getRandomValue(0.0f, 1.0f);
-		positions[i * 3 + 2] = getRandomValue(-3.0f, 3.0f) * sin(((2 * PI) / numParticles) * i);
+		positions[i * 3] = getRandomValue(-5.0f, 5.0f) * cos(((2 * PI) / numParticles) * i);
+		positions[i * 3 + 1] = getRandomValue(0.0f, 2.0f);
+		positions[i * 3 + 2] = getRandomValue(-5.0f, 5.0f) * sin(((2 * PI) / numParticles) * i);
 
 		// Initialize the initial velocities to random values between -1 and 1 for the x- and
 		// z- components, and 1 and 2 for the y-component
@@ -67,9 +68,9 @@ void ParticleSystem::update(float deltaTime)
 			lifeTimes[i] = maxLifeTime - maxLifeTime * i / numParticles;
 
 			// Set the particle's new position
-			positions[i * 3] = getRandomValue(-3.0f, 3.0f) * cos(((2 * PI) / numParticles) * i);
-			positions[i * 3 + 1] = getRandomValue(0.0f, 1.0f);
-			positions[i * 3 + 2] = getRandomValue(-3.0f, 3.0f) * sin(((2 * PI) / numParticles) * i);
+			positions[i * 3] = getRandomValue(-5.0f, 5.0f) * cos(((2 * PI) / numParticles) * i);
+			positions[i * 3 + 1] = getRandomValue(0.0f, 2.0f);
+			positions[i * 3 + 2] = getRandomValue(-5.0f, 5.0f) * sin(((2 * PI) / numParticles) * i);
 
 			// Set the particle's new velocity
 			velocities[i * 3] = getRandomValue(-1.0f, 1.0f);
@@ -101,10 +102,22 @@ void ParticleSystem::update(float deltaTime)
 			positions[i * 3 + 1] += velocities[i * 3 + 1] * deltaTime;
 			positions[i * 3 + 2] += velocities[i * 3 + 2] * deltaTime;
 
-			// Scale the particle color's transparency value down and green value up (every second 
-			// and fourth elements of the colors array) by how long the particle has been alive 
-			// (closer to end of living period means more transparency and more green) CHECK THIS COMMENT!!!
-			colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+			if (colors[i * 4 + 1] < 0.75) {
+				colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+			}
+			else {
+				smokeFlag = true;
+				colors[i * 4] = 0.5f;
+				colors[i * 4 + 1] = 0.5f;
+				colors[i * 4 + 2] = 0.5f;
+			}
+
+			if (smokeFlag) {
+				colors[i * 4] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+				colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+				colors[i * 4 + 2] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+			}
+
 			colors[i * 4 + 3] -= (lifeTimes[i] / maxLifeTime) * deltaTime;
 		}
 
