@@ -29,6 +29,9 @@ private:
 	// Flag of whether or not to transition color to grey (for smoke)
 	bool smokeFlag;
 
+	// Indicates whether or not particle colors have been set to the starting grey color
+	bool colorsWereSet;
+
 public:
 	ParticleSystem(int _numParticles);	
 	void update(float deltaTime);

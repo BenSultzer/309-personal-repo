@@ -11,6 +11,8 @@ ParticleSystem::ParticleSystem(int _numParticles)
 {
 	numParticles = _numParticles;	// Set the number of particles
 	smokeFlag = false;				// Set whether or not smoke should begin
+	colorsWereSet = false;			// Set whether or not particle colors have been set to the
+									// starting grey color
 
 	// Allocate memory for positions, velocities, accelerations, colors, and lifetimes.
 	positions = new float[numParticles * 3];
@@ -87,6 +89,12 @@ void ParticleSystem::update(float deltaTime)
 			colors[i * 4 + 1] = 0.0f;
 			colors[i * 4 + 2] = 0.0f;
 			colors[i * 4 + 3] = 1.0f;
+
+			// Reset the smoke flag
+			smokeFlag = false;
+
+			// Reset the indicator for colors being set to grey
+			colorsWereSet = false;
 		}
 		else {
 			// Update the particle's lifetime
@@ -102,14 +110,15 @@ void ParticleSystem::update(float deltaTime)
 			positions[i * 3 + 1] += velocities[i * 3 + 1] * deltaTime;
 			positions[i * 3 + 2] += velocities[i * 3 + 2] * deltaTime;
 
-			if (colors[i * 4 + 1] < 0.75) {
+			if ((colors[i * 4 + 1] < 1.0f) && !smokeFlag) {
 				colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
 			}
-			else {
+			else if (!colorsWereSet && !smokeFlag) {
 				smokeFlag = true;
-				colors[i * 4] = 0.5f;
-				colors[i * 4 + 1] = 0.5f;
-				colors[i * 4 + 2] = 0.5f;
+				colorsWereSet = true;
+				colors[i * 4] = 0.25f;
+				colors[i * 4 + 1] = 0.25f;
+				colors[i * 4 + 2] = 0.25f;
 			}
 
 			if (smokeFlag) {
