@@ -1,3 +1,7 @@
+// Course: 		        IGME 309
+// Student Name: 	    Ben Sultzer
+// Friday Exercise: 	08
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -96,8 +100,8 @@ void display(void)
 	glColor3f(0.0f, 0.0f, 0.0f);
 	glLineWidth(2.5f);
 	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, -stringLength, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
 	glEnd();
 	glLineWidth(1.0f);
 	// write your code above
