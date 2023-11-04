@@ -129,7 +129,7 @@ void ParticleSystem::update(float deltaTime)
 			positions[i * 3 + 1] += velocities[i * 3 + 1] * deltaTime;
 			positions[i * 3 + 2] += velocities[i * 3 + 2] * deltaTime;
 
-			if ((colors[i * 4] == 1.0f) && (colors[i * 4 + 2] = 0.0f) && (colors[i * 4 + 1] < 1.0f)) {
+			if ((colors[i * 4] == 1.0f) && (colors[i * 4 + 2] == 0.0f) && (colors[i * 4 + 1] < 1.0f)) {
 				colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
 			}
 			else {
