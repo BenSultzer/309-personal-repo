@@ -129,21 +129,21 @@ void ParticleSystem::update(float deltaTime)
 			positions[i * 3 + 1] += velocities[i * 3 + 1] * deltaTime;
 			positions[i * 3 + 2] += velocities[i * 3 + 2] * deltaTime;
 
-			if ((colors[i * 4 + 1] < 1.0f) && !smokeFlag) {
+			if ((colors[i * 4] == 1.0f) && (colors[i * 4 + 2] = 0.0f) && (colors[i * 4 + 1] < 1.0f)) {
 				colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
 			}
-			else if (!colorsWereSet && !smokeFlag) {
-				smokeFlag = true;
-				colorsWereSet = true;
-				colors[i * 4] = 0.25f;
-				colors[i * 4 + 1] = 0.25f;
-				colors[i * 4 + 2] = 0.25f;
-			}
-
-			if (smokeFlag) {
-				colors[i * 4] += (lifeTimes[i] / maxLifeTime) * deltaTime;
-				colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
-				colors[i * 4 + 2] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+			else {
+				if (!colorsWereSet) {
+					colorsWereSet = true;
+					colors[i * 4] = 0.25f;
+					colors[i * 4 + 1] = 0.25f;
+					colors[i * 4 + 2] = 0.25f;
+				}
+				else {
+					colors[i * 4] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+					colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+					colors[i * 4 + 2] += (lifeTimes[i] / maxLifeTime) * deltaTime;
+				}
 			}
 
 			colors[i * 4 + 3] -= (lifeTimes[i] / maxLifeTime) * deltaTime;
