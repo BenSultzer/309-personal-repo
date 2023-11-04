@@ -28,17 +28,27 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		/***************************/
 		// Write your code below
 		// Please add initializations for other arrays as you see appropriate.
-		// Initialize the initial positions for each particle, randomly placing them around
-		// the origin with varying starting heights and distances from the center
-		positions[i * 3] = getRandomValue(-5.0f, 5.0f) * cos(((2 * PI) / numParticles) * i);
+		// Initialize the initial positions for each particle, randomly placing them within a 
+		// square around the origin with varying starting heights and distances from the center
+		positions[i * 3] = getRandomValue(-5.0f, 5.0f);
 		positions[i * 3 + 1] = getRandomValue(0.0f, 2.0f);
-		positions[i * 3 + 2] = getRandomValue(-5.0f, 5.0f) * sin(((2 * PI) / numParticles) * i);
+		positions[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
 
-		// Initialize the initial velocities to random values between -1 and 1 for the x- and
-		// z- components, and 1 and 2 for the y-component
-		velocities[i * 3] = getRandomValue(-1.0f, 1.0f);
-		velocities[i * 3 + 1] = getRandomValue(1.0f, 2.0f);
-		velocities[i * 3 + 2] = getRandomValue(-1.0f, 1.0f);
+		// Define a random direction angle for the current initial velocity
+		float angle = getRandomValue(0.0f, 2 * PI);
+
+		// Get a random speed value for the current initial x-velocity
+		float speedX = getRandomValue(minSpeedX, maxSpeedX);
+
+		// Get a random speed value for the current initial z-velocity
+		float speedZ = getRandomValue(minSpeedZ, maxSpeedZ);
+
+		// Initialize the initial velocities to random values between each component's min and
+		// max values, using a sine and cosine relationship for the x- and z-components to create
+		// a circular shape for the particle system.
+		velocities[i * 3] = speedX * cos(angle);
+		velocities[i * 3 + 1] = getRandomValue(minSpeedY, maxSpeedY);
+		velocities[i * 3 + 2] = speedZ * sin(angle);
 
 		// Initialize the initial accelerations to random values between -0.5 and 0.5 for the
 		// x- and z-components and a constant acceleration of 0.25 for the y-component
@@ -70,14 +80,23 @@ void ParticleSystem::update(float deltaTime)
 			lifeTimes[i] = maxLifeTime - maxLifeTime * i / numParticles;
 
 			// Set the particle's new position
-			positions[i * 3] = getRandomValue(-5.0f, 5.0f) * cos(((2 * PI) / numParticles) * i);
+			positions[i * 3] = getRandomValue(-5.0f, 5.0f);
 			positions[i * 3 + 1] = getRandomValue(0.0f, 2.0f);
-			positions[i * 3 + 2] = getRandomValue(-5.0f, 5.0f) * sin(((2 * PI) / numParticles) * i);
+			positions[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
+
+			// Define a random direction angle for the current new velocity
+			float angle = getRandomValue(0.0f, 2 * PI);
+
+			// Get a random speed value for the current new x-velocity
+			float speedX = getRandomValue(minSpeedX, maxSpeedX);
+
+			// Get a random speed value for the current new z-velocity
+			float speedZ = getRandomValue(minSpeedZ, maxSpeedZ);
 
 			// Set the particle's new velocity
-			velocities[i * 3] = getRandomValue(-1.0f, 1.0f);
-			velocities[i * 3 + 1] = getRandomValue(1.0f, 2.0f);
-			velocities[i * 3 + 2] = getRandomValue(-1.0f, 1.0f);
+			velocities[i * 3] = speedX * cos(angle);
+			velocities[i * 3 + 1] = getRandomValue(minSpeedY, maxSpeedY);
+			velocities[i * 3 + 2] = speedZ * sin(angle);
 
 			// Set the particle's new acceleration
 			accelerations[i * 3] = getRandomValue(-0.5f, 0.5f);
