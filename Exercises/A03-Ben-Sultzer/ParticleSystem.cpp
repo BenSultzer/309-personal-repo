@@ -1,3 +1,7 @@
+// Course:				IGME 309
+// Student Name:		Ben Sultzer
+// Assignment Number:	03
+
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include "ParticleSystem.h"

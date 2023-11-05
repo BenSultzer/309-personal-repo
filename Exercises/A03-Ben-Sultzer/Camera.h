@@ -1,3 +1,7 @@
+// Course:				IGME 309
+// Student Name:		Ben Sultzer
+// Assignment Number:	03
+
 #pragma once
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>

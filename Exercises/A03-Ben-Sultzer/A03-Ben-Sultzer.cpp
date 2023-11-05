@@ -1,4 +1,8 @@
-﻿#include <GL/glew.h>
+﻿// Course:				IGME 309
+// Student Name:		Ben Sultzer
+// Assignment Number:	03
+
+#include <GL/glew.h>
 #include <GL/wglew.h>
 
 #ifdef __APPLE__

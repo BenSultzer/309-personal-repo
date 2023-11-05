@@ -1,3 +1,7 @@
+// Course:				IGME 309
+// Student Name:		Ben Sultzer
+// Assignment Number:	03
+
 #ifndef _TEXT_H_
 #define _TEXT_H_
 
