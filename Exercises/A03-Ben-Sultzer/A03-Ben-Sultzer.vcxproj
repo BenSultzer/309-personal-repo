@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="E02-Ben-Sultzer.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="A03-Ben-Sultzer.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
