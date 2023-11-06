@@ -52,7 +52,7 @@ ParticleSystem::ParticleSystem(int _numParticles)
 		// a circular shape for the particle system.
 		velocities[i * 3] = speedX * cos(angle);
 		velocities[i * 3 + 1] = getRandomValue(minSpeedY, maxSpeedY);
-		velocities[i * 3 + 2] = speedZ * sin(angle);
+		velocities[i * 3 + 2] = speedX * sin(angle);
 
 		// Initialize the initial accelerations to random values between -0.5 and 0.5 for the
 		// x- and z-components and a constant acceleration of 0.25 for the y-component
@@ -84,15 +84,15 @@ void ParticleSystem::update(float deltaTime)
 			lifeTimes[i] = maxLifeTime - maxLifeTime * i / numParticles;
 
 			// Set the particle's new position
-			positions[i * 3] = getRandomValue(-5.0f, 5.0f);
-			positions[i * 3 + 1] = getRandomValue(0.0f, 2.0f);
-			positions[i * 3 + 2] = getRandomValue(-5.0f, 5.0f);
+			positions[i * 3] = 0.0f;// getRandomValue(-5.0f, 5.0f);
+			positions[i * 3 + 1] = 0.0f; // getRandomValue(0.0f, 2.0f);
+			positions[i * 3 + 2] = 0.0f; // getRandomValue(-5.0f, 5.0f);
 
 			// Define a random direction angle for the current new velocity
 			float angle = getRandomValue(0.0f, 2 * PI);
 
 			// Get a random speed value for the current new x-velocity
-			float speedX = getRandomValue(minSpeedX, maxSpeedX);
+			float speedX = getRandomValue(3, 5);
 
 			// Get a random speed value for the current new z-velocity
 			float speedZ = getRandomValue(minSpeedZ, maxSpeedZ);
@@ -100,12 +100,12 @@ void ParticleSystem::update(float deltaTime)
 			// Set the particle's new velocity
 			velocities[i * 3] = speedX * cos(angle);
 			velocities[i * 3 + 1] = getRandomValue(minSpeedY, maxSpeedY);
-			velocities[i * 3 + 2] = speedZ * sin(angle);
+			velocities[i * 3 + 2] = speedX * sin(angle);
 
 			// Set the particle's new acceleration
-			accelerations[i * 3] = getRandomValue(-0.5f, 0.5f);
-			accelerations[i * 3 + 1] = 0.25f;
-			accelerations[i * 3 + 2] = getRandomValue(-0.5f, 0.5f);
+			//accelerations[i * 3] = getRandomValue(-0.5f, 0.5f);
+			//accelerations[i * 3 + 1] = 0.25f;
+			//accelerations[i * 3 + 2] = getRandomValue(-0.5f, 0.5f);
 
 			// Set the particle's new color
 			colors[i * 4] = 1.0f;
@@ -132,6 +132,8 @@ void ParticleSystem::update(float deltaTime)
 			positions[i * 3] += velocities[i * 3] * deltaTime;
 			positions[i * 3 + 1] += velocities[i * 3 + 1] * deltaTime;
 			positions[i * 3 + 2] += velocities[i * 3 + 2] * deltaTime;
+
+			if (lifeTimes[i] < maxLifeTime * 0.5f)
 
 			if ((colors[i * 4] == 1.0f) && (colors[i * 4 + 2] == 0.0f) && (colors[i * 4 + 1] < 1.0f)) {
 				colors[i * 4 + 1] += (lifeTimes[i] / maxLifeTime) * deltaTime;
