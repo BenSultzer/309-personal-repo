@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "E07-Ben-Sultzer", "..\E07-B
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "E08-Ben-Sultzer", "..\E08-Ben-Sultzer\E08-Ben-Sultzer.vcxproj", "{9EBCA3B1-C5E8-4954-BE73-AA3DE8CD8EAB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "A04-Ben-Sultzer", "..\A04-Ben-Sultzer\A04-Ben-Sultzer.vcxproj", "{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{9EBCA3B1-C5E8-4954-BE73-AA3DE8CD8EAB}.Release|x64.Build.0 = Release|x64
 		{9EBCA3B1-C5E8-4954-BE73-AA3DE8CD8EAB}.Release|x86.ActiveCfg = Release|Win32
 		{9EBCA3B1-C5E8-4954-BE73-AA3DE8CD8EAB}.Release|x86.Build.0 = Release|Win32
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Debug|x64.ActiveCfg = Debug|x64
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Debug|x64.Build.0 = Debug|x64
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Debug|x86.ActiveCfg = Debug|Win32
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Debug|x86.Build.0 = Debug|Win32
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Release|x64.ActiveCfg = Release|x64
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Release|x64.Build.0 = Release|x64
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Release|x86.ActiveCfg = Release|Win32
+		{0B6FBC66-9D5B-40E8-850B-4FCE64FC1A3C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
