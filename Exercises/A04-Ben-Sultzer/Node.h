@@ -8,7 +8,7 @@ using namespace std;
 /// </summary>
 class Node {
 private:
-	string bodyPart;			// The body part this Node represents
+	string bodyPart = "";		// The body part this Node represents
 	Node* left = nullptr;		// The left child of this Node
 	Node* center = nullptr;		// The center child of this Node
 	Node* right = nullptr;		// The right child of this Node
@@ -19,7 +19,16 @@ public:
 	/// </summary>
 	/// <param name="p_bodyPart">The name of the body part this
 	/// Node will represent</param>
-	Node(string p_bodyPart) {
-		bodyPart = p_bodyPart; // MUST BE DEFINED IN SRC FILE!!!
-	}
+	Node(string p_bodyPart);
+
+	/// <summary>
+	/// The Node's destructor
+	/// </summary>
+	~Node();
+
+	/// <summary>
+	/// Gets the name of the body part this Node represents
+	/// </summary>
+	/// <returns>The name of the body part</returns>
+	string getBodyPartName();
 };

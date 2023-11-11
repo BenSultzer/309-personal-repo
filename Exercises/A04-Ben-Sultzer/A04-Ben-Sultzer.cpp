@@ -28,8 +28,31 @@ float rotations[MAX_NUM_CIRCLE];
 float curMouse[2];
 float preMouse[2];
 
+// The array of all body parts
+string bodyParts[16];
+
 void init(void)
 {
+    // Initialize the array of body parts
+    bodyParts = { // CHECK THIS!!!
+        "Head",
+        "Neck",
+        "Upper Body",
+        "Left Arm",
+        "Left Forearm",
+        "Left Hand",
+        "Right Arm",
+        "Right Forearm",
+        "Right Hand",
+        "Lower Body",
+        "Left Thigh",
+        "Left Leg",
+        "Left Foot",
+        "Right Thigh",
+        "Right Leg",
+        "Right Foot"
+    };
+
     for (int i = 0; i < 256; i++) {
         keyStates[i] = false;
     }
