@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <math.h>
+#include "Node.h"
 using namespace std;
 
 #define MAX_NUM_CIRCLE 7
@@ -29,29 +30,80 @@ float curMouse[2];
 float preMouse[2];
 
 // The array of all body parts
-string bodyParts[16];
+Node bodyParts[] = { // HIERARCHY DETERMINES ORDER IN ARRAY?
+        Node("Head", 0),
+        Node("Neck", 1),
+        Node("Upper Body", 2),
+        Node("Left Arm", 3),
+        Node("Left Forearm", 4),
+        Node("Left Hand", 5),
+        Node("Right Arm", 6),
+        Node("Right Forearm", 7),
+        Node("Right Hand", 8),
+        Node("Lower Body", 9),
+        Node("Left Thigh", 10),
+        Node("Left Leg", 11),
+        Node("Left Foot", 12),
+        Node("Right Thigh", 13),
+        Node("Right Leg", 14),
+        Node("Right Foot", 15)
+};
 
 void init(void)
 {
-    // Initialize the array of body parts
-    bodyParts = { // CHECK THIS!!!
-        "Head",
-        "Neck",
-        "Upper Body",
-        "Left Arm",
-        "Left Forearm",
-        "Left Hand",
-        "Right Arm",
-        "Right Forearm",
-        "Right Hand",
-        "Lower Body",
-        "Left Thigh",
-        "Left Leg",
-        "Left Foot",
-        "Right Thigh",
-        "Right Leg",
-        "Right Foot"
-    };
+    // Set up the Tree data structure
+    for (int i = 0; i < 16; i++) {
+        string currBodyPart = bodyParts[i].getBodyPartName();
+        if (currBodyPart == "Head") {
+
+        }
+        else if (currBodyPart == "Neck") {
+
+        }
+        else if (currBodyPart == "Upper Body") {
+
+        }
+        else if (currBodyPart == "Left Arm") {
+
+        }
+        else if (currBodyPart == "Left Forearm") {
+
+        }
+        else if (currBodyPart == "Left Hand") {
+
+        }
+        else if (currBodyPart == "Right Arm") {
+
+        }
+        else if (currBodyPart == "Right Forearm") {
+
+        }
+        else if (currBodyPart == "Right Hand") {
+
+        }
+        else if (currBodyPart == "Lower Body") {
+            bodyParts[i].
+
+        }
+        else if (currBodyPart == "Left Thigh") {
+
+        }
+        else if (currBodyPart == "Left Leg") {
+
+        }
+        else if (currBodyPart == "Left Foot") {
+
+        }
+        else if (currBodyPart == "Right Thigh") {
+
+        }
+        else if (currBodyPart == "Right Leg") {
+
+        }
+        else if (currBodyPart == "Right Foot") {
+
+        }
+    }
 
     for (int i = 0; i < 256; i++) {
         keyStates[i] = false;

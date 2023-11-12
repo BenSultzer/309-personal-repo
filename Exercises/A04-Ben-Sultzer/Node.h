@@ -9,6 +9,9 @@ using namespace std;
 class Node {
 private:
 	string bodyPart = "";		// The body part this Node represents
+	int id;						// An identifier for this Node (equal to 
+								// the Node's index in the array that stores 
+								// all body parts)
 	Node* left = nullptr;		// The left child of this Node
 	Node* center = nullptr;		// The center child of this Node
 	Node* right = nullptr;		// The right child of this Node
@@ -19,7 +22,9 @@ public:
 	/// </summary>
 	/// <param name="p_bodyPart">The name of the body part this
 	/// Node will represent</param>
-	Node(string p_bodyPart);
+	/// <param name="p_id">The ID that will be associated with this
+	/// Node</param>
+	Node(string p_bodyPart, int p_id);
 
 	/// <summary>
 	/// The Node's destructor
@@ -31,4 +36,10 @@ public:
 	/// </summary>
 	/// <returns>The name of the body part</returns>
 	string getBodyPartName();
+
+	/// <summary>
+	/// Returns the ID for this Node
+	/// </summary>
+	/// <returns>The ID of this Node</returns>
+	int getNodeID();
 };

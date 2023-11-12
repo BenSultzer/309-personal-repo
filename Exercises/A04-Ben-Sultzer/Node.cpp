@@ -5,9 +5,12 @@
 /// </summary>
 /// <param name="p_bodyPart">The name of the body part this
 /// Node will represent</param>
-Node::Node(string p_bodyPart)
+/// <param name="p_id">The ID that will be associated with this
+/// Node</param>
+Node::Node(string p_bodyPart, int p_id)
 {
 	bodyPart = p_bodyPart;
+	id = p_id;
 }
 
 /// <summary>
@@ -27,4 +30,13 @@ Node::~Node()
 string Node::getBodyPartName()
 {
 	return bodyPart;
+}
+
+/// <summary>
+/// Returns the ID for this Node
+/// </summary>
+/// <returns>The ID of this Node</returns>
+int Node::getNodeID()
+{
+	return id;
 }
