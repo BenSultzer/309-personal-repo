@@ -13,6 +13,26 @@
 #include "Node.h"
 using namespace std;
 
+enum class BODY_PARTS { // CHECK BODY PARTS, ENUM SYNTAX, AND MAKE SURE REMOVED EVERYTHING 
+                        // RELATED TO ID MEMBER
+    HEAD = 0,
+    NECK = 1,
+    UPPER_BODY = 2,
+    LEFT_ARM = 3,
+    LEFT_FOREARM = 4,
+    LEFT_HAND = 5, 
+    RIGHT_ARM = 6, 
+    RIGHT_FOREARM = 7,
+    RIGHT_HAND = 8,
+    LOWER_BODY = 9,
+    LEFT_THIGH = 10,
+    LEFT_LEG = 11,
+    LEFT_FOOT = 12,
+    RIGHT_THIGH = 13,
+    RIGHT_LEG = 14,
+    RIGHT_FOOT = 15
+};
+
 #define MAX_NUM_CIRCLE 7
 #define CIRCLE_RADIUM 2.0
 
@@ -30,7 +50,7 @@ float curMouse[2];
 float preMouse[2];
 
 // The array of all body parts
-Node bodyParts[] = { // HIERARCHY DETERMINES ORDER IN ARRAY?
+Node bodyParts[] = {
         Node("Head", 0),
         Node("Neck", 1),
         Node("Upper Body", 2),
@@ -82,8 +102,7 @@ void init(void)
 
         }
         else if (currBodyPart == "Lower Body") {
-            bodyParts[i].
-
+            bodyParts[i].setCenterNode()
         }
         else if (currBodyPart == "Left Thigh") {
 

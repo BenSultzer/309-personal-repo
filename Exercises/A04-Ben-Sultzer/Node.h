@@ -9,9 +9,6 @@ using namespace std;
 class Node {
 private:
 	string bodyPart = "";		// The body part this Node represents
-	int id;						// An identifier for this Node (equal to 
-								// the Node's index in the array that stores 
-								// all body parts)
 	Node* left = nullptr;		// The left child of this Node
 	Node* center = nullptr;		// The center child of this Node
 	Node* right = nullptr;		// The right child of this Node
@@ -22,9 +19,7 @@ public:
 	/// </summary>
 	/// <param name="p_bodyPart">The name of the body part this
 	/// Node will represent</param>
-	/// <param name="p_id">The ID that will be associated with this
-	/// Node</param>
-	Node(string p_bodyPart, int p_id);
+	Node(string p_bodyPart);
 
 	/// <summary>
 	/// The Node's destructor
@@ -42,4 +37,25 @@ public:
 	/// </summary>
 	/// <returns>The ID of this Node</returns>
 	int getNodeID();
+
+	/// <summary>
+	/// Sets the left Node of this Node
+	/// </summary>
+	/// <param name="p_left">The Node to store as this
+	/// Node's left Node</param>
+	void setLeftNode(Node p_left);
+
+	/// <summary>
+	/// Sets the center Node of this Node
+	/// </summary>
+	/// <param name="p_center">The Node to store as this
+	/// Node's center Node</param>
+	void setCenterNode(Node p_center);
+
+	/// <summary>
+	/// Sets the right Node of this Node
+	/// </summary>
+	/// <param name="p_right">The Node to store as this
+	/// Node's right Node</param>
+	void setRightNode(Node p_right);
 };

@@ -5,12 +5,9 @@
 /// </summary>
 /// <param name="p_bodyPart">The name of the body part this
 /// Node will represent</param>
-/// <param name="p_id">The ID that will be associated with this
-/// Node</param>
-Node::Node(string p_bodyPart, int p_id)
+Node::Node(string p_bodyPart)
 {
 	bodyPart = p_bodyPart;
-	id = p_id;
 }
 
 /// <summary>
@@ -39,4 +36,34 @@ string Node::getBodyPartName()
 int Node::getNodeID()
 {
 	return id;
+}
+
+/// <summary>
+/// Sets the left Node of this Node
+/// </summary>
+/// <param name="p_left">The Node to store as this
+/// Node's left Node</param>
+void Node::setLeftNode(Node p_left)
+{
+	left = &p_left;
+}
+
+/// <summary>
+/// Sets the center Node of this Node
+/// </summary>
+/// <param name="p_center">The Node to store as this
+/// Node's center Node</param>
+void Node::setCenterNode(Node p_center)
+{
+	center = &p_center;
+}
+
+/// <summary>
+/// Sets the right Node of this Node
+/// </summary>
+/// <param name="p_right">The Node to store as this
+/// Node's right Node</param>
+void Node::setRightNode(Node p_right)
+{
+	right = &p_right;
 }
