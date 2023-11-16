@@ -30,15 +30,6 @@ string Node::getBodyPartName()
 }
 
 /// <summary>
-/// Returns the ID for this Node
-/// </summary>
-/// <returns>The ID of this Node</returns>
-int Node::getNodeID()
-{
-	return id;
-}
-
-/// <summary>
 /// Sets the left Node of this Node
 /// </summary>
 /// <param name="p_left">The Node to store as this

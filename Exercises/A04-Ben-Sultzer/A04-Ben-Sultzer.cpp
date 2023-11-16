@@ -8,13 +8,16 @@
 #include <GL/freeglut.h>
 #endif
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <math.h>
 #include "Node.h"
 using namespace std;
+using namespace glm;
 
-enum class BODY_PARTS { // CHECK BODY PARTS, ENUM SYNTAX, AND MAKE SURE REMOVED EVERYTHING 
-                        // RELATED TO ID MEMBER
+enum class BODY_PARTS {
     HEAD = 0,
     NECK = 1,
     UPPER_BODY = 2,
@@ -51,22 +54,22 @@ float preMouse[2];
 
 // The array of all body parts
 Node bodyParts[] = {
-        Node("Head", 0),
-        Node("Neck", 1),
-        Node("Upper Body", 2),
-        Node("Left Arm", 3),
-        Node("Left Forearm", 4),
-        Node("Left Hand", 5),
-        Node("Right Arm", 6),
-        Node("Right Forearm", 7),
-        Node("Right Hand", 8),
-        Node("Lower Body", 9),
-        Node("Left Thigh", 10),
-        Node("Left Leg", 11),
-        Node("Left Foot", 12),
-        Node("Right Thigh", 13),
-        Node("Right Leg", 14),
-        Node("Right Foot", 15)
+        Node("Head"),
+        Node("Neck"),
+        Node("Upper Body"),
+        Node("Left Arm"),
+        Node("Left Forearm"),
+        Node("Left Hand"),
+        Node("Right Arm"),
+        Node("Right Forearm"),
+        Node("Right Hand"),
+        Node("Lower Body"),
+        Node("Left Thigh"),
+        Node("Left Leg"),
+        Node("Left Foot"),
+        Node("Right Thigh"),
+        Node("Right Leg"),
+        Node("Right Foot")
 };
 
 void init(void)
@@ -102,7 +105,7 @@ void init(void)
 
         }
         else if (currBodyPart == "Lower Body") {
-            bodyParts[i].setCenterNode()
+            
         }
         else if (currBodyPart == "Left Thigh") {
 
@@ -141,13 +144,22 @@ void init(void)
     buttonState = -1;
 }
 
-void drawCircle(float radius, const float* c)
+/// <summary>
+/// Draws a rectangle with the four given vertices
+/// </summary>
+/// <param name="v1">The first vertex of the rectangle</param>
+/// <param name="v2">The second vertex of the rectangle</param>
+/// <param name="v3">The third vertex of the rectangle</param>
+/// <param name="v4">The fourth vertex of the rectangle</param>
+void drawRectangle(vec2 v1, vec2 v2, vec2 v3, vec2 v4)
 {
-    glColor3fv(c);
+    glColor3f(0.0f, 0.0f, 0.0f);
     glLineWidth(3.0f);
-    glBegin(GL_LINE_STRIP);
-    for (int i = 0; i <= 100; i++)
-        glVertex2f(radius * cosf(3.14 * 2 / 100 * i), radius * sinf(3.14 * 2 / 100 * i));
+    glBegin(GL_POLYGON);
+    glVertex2f(v1.x, v1.y);
+    glVertex2f(v2.x, v2.y);
+    glVertex2f(v3.x, v3.y);
+    glVertex2f(v4.x, v4.y);
     glEnd();
 }
 
@@ -159,49 +171,7 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // the following codes could be written in a for loop.
-    // Here I expand them so that you can better trace the changes of cirlce's coordinate system.
-
-    int cid = -1; // the index of current circle
-    // circle 0
-    cid = 0;
-    glTranslatef(translations[cid * 2 + 0], translations[cid * 2 + 1], 0.0f);
-    glRotatef(rotations[cid], 0.0f, 0.0f, 1.0f);
-    drawCircle(CIRCLE_RADIUM * (MAX_NUM_CIRCLE - cid) / MAX_NUM_CIRCLE, colors + cid * 3);
-
-    // circle 1
-    cid = 1;
-    glTranslatef(translations[cid * 2 + 0], translations[cid * 2 + 1], 0.0f);
-    glRotatef(rotations[cid], 0.0f, 0.0f, 1.0f);
-    glPushMatrix(); // push the circle 1's CS to the modelview stack
-    drawCircle(CIRCLE_RADIUM * (MAX_NUM_CIRCLE - cid) / MAX_NUM_CIRCLE, colors + cid * 3);
-
-    // circle 2
-    cid = 2;
-    glTranslatef(translations[cid * 2 + 0], translations[cid * 2 + 1], 0.0f);
-    glRotatef(rotations[cid], 0.0f, 0.0f, 1.0f);
-    drawCircle(CIRCLE_RADIUM * (MAX_NUM_CIRCLE - cid) / MAX_NUM_CIRCLE, colors + cid * 3);
-
-    // circle 3
-    cid = 3;
-    glTranslatef(translations[cid * 2 + 0], translations[cid * 2 + 1], 0.0f);
-    glRotatef(rotations[cid], 0.0f, 0.0f, 1.0f);
-    drawCircle(CIRCLE_RADIUM * (MAX_NUM_CIRCLE - cid) / MAX_NUM_CIRCLE, colors + cid * 3);
-
-
-    glPopMatrix(); // back to the CS of Circle 1
-    // circle 4
-    cid = 4;
-    glTranslatef(translations[cid * 2 + 0], translations[cid * 2 + 1], 0.0f);
-    glRotatef(rotations[cid], 0.0f, 0.0f, 1.0f);
-    drawCircle(CIRCLE_RADIUM * (MAX_NUM_CIRCLE - cid) / MAX_NUM_CIRCLE, colors + cid * 3);
-
-    // circle 5
-    cid = 5;
-    glTranslatef(translations[cid * 2 + 0], translations[cid * 2 + 1], 0.0f);
-    glRotatef(rotations[cid], 0.0f, 0.0f, 1.0f);
-    drawCircle(CIRCLE_RADIUM * (MAX_NUM_CIRCLE - cid) / MAX_NUM_CIRCLE, colors + cid * 3);
-
+    
 
     glutSwapBuffers();
 }
