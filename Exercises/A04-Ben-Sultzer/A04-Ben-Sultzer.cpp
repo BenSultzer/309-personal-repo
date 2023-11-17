@@ -17,7 +17,7 @@
 using namespace std;
 using namespace glm;
 
-enum class BODY_PARTS {
+enum class BodyParts {
     HEAD = 0,
     NECK = 1,
     UPPER_BODY = 2,
@@ -76,39 +76,136 @@ void init(void)
 {
     // Set up the Tree data structure
     for (int i = 0; i < 16; i++) {
+        // Get the next body part in the array
         string currBodyPart = bodyParts[i].getBodyPartName();
-        if (currBodyPart == "Head") {
 
+        // Create a variable to store the current body part's enum class 
+        // type when determining what the current body part is
+        BodyParts bodyPartType;
+        
+        if (currBodyPart == "Head") { 
+            // Has no child body parts
         }
         else if (currBodyPart == "Neck") {
+            // Assign the neck's center node
+            // Set the body part type to HEAD (The neck's center node)
+            bodyPartType = BodyParts::HEAD;
 
+            // Get the integer associated with the head
+            int headValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[headValue]);
         }
         else if (currBodyPart == "Upper Body") {
+            // Assign the upper body's left, center, and right nodes
+            // Set the body part type to RIGHT_ARM (The upper body's
+            // left node)
+            bodyPartType = BodyParts::RIGHT_ARM;
 
+            // Get the integer associated with the right arm
+            int rightArmValue = static_cast<int>(bodyPartType);
+
+            // Set the left node
+            bodyParts[i].setLeftNode(bodyParts[rightArmValue]);
+
+            // Do the same for the center node
+            bodyPartType = BodyParts::NECK;
+            int neckValue = static_cast<int>(bodyPartType);
+            bodyParts[i].setCenterNode(bodyParts[neckValue]);
+
+            // Do the same for the right node
+            bodyPartType = BodyParts::LEFT_ARM;
+            int leftArmValue = static_cast<int>(bodyPartType);
+            bodyParts[i].setRightNode(bodyParts[leftArmValue]);
         }
         else if (currBodyPart == "Left Arm") {
+            // Assign the left arm's center node
+            // Set the body part type to LEFT_FOREARM (The left arm's 
+            // center node)
+            bodyPartType = BodyParts::LEFT_FOREARM;
 
+            // Get the integer associated with the left forearm
+            int leftForearmValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[leftForearmValue]);
         }
         else if (currBodyPart == "Left Forearm") {
+            // Assign the left forearm's center node
+            // Set the body part type to LEFT_HAND (The left forearm's 
+            // center node)
+            bodyPartType = BodyParts::LEFT_HAND;
 
+            // Get the integer associated with the left hand
+            int leftHandValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[leftHandValue]);
         }
         else if (currBodyPart == "Left Hand") {
-
+            // Has no child body parts
         }
         else if (currBodyPart == "Right Arm") {
+            // Assign the right arm's center node
+            // Set the body part type to RIGHT_FOREARM (The right arm's 
+            // center node)
+            bodyPartType = BodyParts::RIGHT_FOREARM;
 
+            // Get the integer associated with the right forearm
+            int rightForearmValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[rightForearmValue]);
         }
         else if (currBodyPart == "Right Forearm") {
+            // Assign the right forearm's center node
+            // Set the body part type to RIGHT_HAND (The right forearm's 
+            // center node)
+            bodyPartType = BodyParts::RIGHT_HAND;
 
+            // Get the integer associated with the right hand
+            int rightHandValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[rightHandValue]);
         }
         else if (currBodyPart == "Right Hand") {
-
+            // Has no child body parts
         }
         else if (currBodyPart == "Lower Body") {
-            
+            // Assign the lower body's left, center, and right nodes
+            // Set the body part type to RIGHT_THIGH (The lower body's
+            // left node)
+            bodyPartType = BodyParts::RIGHT_THIGH;
+
+            // Get the integer associated with the right thigh
+            int rightThighValue = static_cast<int>(bodyPartType);
+
+            // Set the left node
+            bodyParts[i].setLeftNode(bodyParts[rightThighValue]);
+
+            // Do the same for the center node
+            bodyPartType = BodyParts::UPPER_BODY;
+            int upperBodyValue = static_cast<int>(bodyPartType);
+            bodyParts[i].setCenterNode(bodyParts[upperBodyValue]);
+
+            // Do the same for the right node
+            bodyPartType = BodyParts::LEFT_THIGH;
+            int leftThighValue = static_cast<int>(bodyPartType);
+            bodyParts[i].setRightNode(bodyParts[leftThighValue]);
         }
         else if (currBodyPart == "Left Thigh") {
+            // Assign the left thigh's center node
+            // Set the body part type to LEFT_LEG (The left thigh's 
+            // center node)
+            bodyPartType = BodyParts::LEFT_LEG;
 
+            // Get the integer associated with the left leg
+            int leftLegValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[leftLegValue]);
         }
         else if (currBodyPart == "Left Leg") {
 
