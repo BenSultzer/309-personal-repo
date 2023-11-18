@@ -15,9 +15,9 @@ Node::Node(string p_bodyPart)
 /// </summary>
 Node::~Node()
 {
-	delete left;
-	delete center;
-	delete right;
+	//delete left;
+	//delete center;
+	//delete right;
 }
 
 /// <summary>

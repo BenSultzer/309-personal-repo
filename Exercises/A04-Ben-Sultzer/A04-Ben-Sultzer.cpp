@@ -72,8 +72,11 @@ Node bodyParts[] = {
         Node("Right Foot")
 };
 
-void init(void)
-{
+/// <summary>
+/// Makes the connections between each body part node to 
+/// represent the robot as a Tree data structure
+/// </summary>
+void buildTree() {
     // Set up the Tree data structure
     for (int i = 0; i < 16; i++) {
         // Get the next body part in the array
@@ -82,8 +85,8 @@ void init(void)
         // Create a variable to store the current body part's enum class 
         // type when determining what the current body part is
         BodyParts bodyPartType;
-        
-        if (currBodyPart == "Head") { 
+
+        if (currBodyPart == "Head") {
             // Has no child body parts
         }
         else if (currBodyPart == "Neck") {
@@ -208,21 +211,54 @@ void init(void)
             bodyParts[i].setCenterNode(bodyParts[leftLegValue]);
         }
         else if (currBodyPart == "Left Leg") {
+            // Assign the left leg's center node
+            // Set the body part type to LEFT_FOOT (The left leg's 
+            // center node)
+            bodyPartType = BodyParts::LEFT_FOOT;
 
+            // Get the integer associated with the left foot
+            int leftFootValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[leftFootValue]);
         }
         else if (currBodyPart == "Left Foot") {
-
+            // Has no child body parts
         }
         else if (currBodyPart == "Right Thigh") {
+            // Assign the right thigh's center node
+            // Set the body part type to RIGHT_LEG (The right thigh's 
+            // center node)
+            bodyPartType = BodyParts::RIGHT_LEG;
 
+            // Get the integer associated with the right leg
+            int rightLegValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[rightLegValue]);
         }
         else if (currBodyPart == "Right Leg") {
+            // Assign the right leg's center node
+            // Set the body part type to RIGHT_FOOT (The right leg's 
+            // center node)
+            bodyPartType = BodyParts::RIGHT_FOOT;
 
+            // Get the integer associated with the right foot
+            int rightFootValue = static_cast<int>(bodyPartType);
+
+            // Set the center node
+            bodyParts[i].setCenterNode(bodyParts[rightFootValue]);
         }
         else if (currBodyPart == "Right Foot") {
-
+            // Has no child body parts
         }
     }
+}
+
+void init(void)
+{
+    // Create the Tree data structure that represents the robot's body
+    buildTree();
 
     for (int i = 0; i < 256; i++) {
         keyStates[i] = false;
@@ -260,6 +296,14 @@ void drawRectangle(vec2 v1, vec2 v2, vec2 v3, vec2 v4)
     glEnd();
 }
 
+/// <summary>
+/// Uses the drawRectangle() function to draw the robot as a group
+/// of rectangles 
+/// </summary>
+void drawRobot() {
+
+}
+
 void display(void)
 {
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -268,7 +312,8 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    
+    // Draw the robot
+    drawRobot();
 
     glutSwapBuffers();
 }
