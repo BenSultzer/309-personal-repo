@@ -301,7 +301,7 @@ void drawRectangle(vec2 v1, vec2 v2, vec2 v3, vec2 v4)
 /// of rectangles 
 /// </summary>
 void drawRobot() {
-
+    // ABOUT TO START DRAWING THE ROBOT
 }
 
 void display(void)
