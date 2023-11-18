@@ -280,15 +280,15 @@ void init(void)
 /// <summary>
 /// Draws a rectangle with the four given vertices
 /// </summary>
-/// <param name="v1">The first vertex of the rectangle</param>
-/// <param name="v2">The second vertex of the rectangle</param>
-/// <param name="v3">The third vertex of the rectangle</param>
-/// <param name="v4">The fourth vertex of the rectangle</param>
+/// <param name="v1">The top left vertex of the rectangle</param>
+/// <param name="v2">The bottom left vertex of the rectangle</param>
+/// <param name="v3">The bottom right vertex of the rectangle</param>
+/// <param name="v4">The top right vertex of the rectangle</param>
 void drawRectangle(vec2 v1, vec2 v2, vec2 v3, vec2 v4)
 {
     glColor3f(0.0f, 0.0f, 0.0f);
     glLineWidth(3.0f);
-    glBegin(GL_POLYGON);
+    glBegin(GL_LINE_LOOP);
     glVertex2f(v1.x, v1.y);
     glVertex2f(v2.x, v2.y);
     glVertex2f(v3.x, v3.y);
@@ -301,7 +301,10 @@ void drawRectangle(vec2 v1, vec2 v2, vec2 v3, vec2 v4)
 /// of rectangles 
 /// </summary>
 void drawRobot() {
-    // ABOUT TO START DRAWING THE ROBOT
+    // Draw the root part (Lower Body) and push its coordinate system into
+    // the ModelView matrix stack
+    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+
 }
 
 void display(void)
