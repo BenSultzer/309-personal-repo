@@ -280,19 +280,19 @@ void init(void)
 /// <summary>
 /// Draws a rectangle with the four given vertices
 /// </summary>
-/// <param name="v1">The top left vertex of the rectangle</param>
-/// <param name="v2">The bottom left vertex of the rectangle</param>
-/// <param name="v3">The bottom right vertex of the rectangle</param>
-/// <param name="v4">The top right vertex of the rectangle</param>
-void drawRectangle(vec2 v1, vec2 v2, vec2 v3, vec2 v4)
+/// <param name="topLeft">The top left vertex of the rectangle</param>
+/// <param name="bottomLeft">The bottom left vertex of the rectangle</param>
+/// <param name="bottomRight">The bottom right vertex of the rectangle</param>
+/// <param name="topRight">The top right vertex of the rectangle</param>
+void drawRectangle(vec2 topLeft, vec2 bottomLeft, vec2 bottomRight, vec2 topRight)
 {
     glColor3f(0.0f, 0.0f, 0.0f);
     glLineWidth(3.0f);
     glBegin(GL_LINE_LOOP);
-    glVertex2f(v1.x, v1.y);
-    glVertex2f(v2.x, v2.y);
-    glVertex2f(v3.x, v3.y);
-    glVertex2f(v4.x, v4.y);
+    glVertex2f(topLeft.x, topLeft.y);
+    glVertex2f(bottomLeft.x, bottomLeft.y);
+    glVertex2f(bottomRight.x, bottomRight.y);
+    glVertex2f(topRight.x, topRight.y);
     glEnd();
 }
 
@@ -318,7 +318,7 @@ void drawRobot() {
     bid = 1;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-3.0f, 2.0f), vec2(-3.0f, 0.0f), vec2(3.0f, 0.0f), vec2(3.0f, 2.0f));
     glPushMatrix(); 
     glPushMatrix(); // Push the Upper Body's matrix
     glPushMatrix();
@@ -327,14 +327,14 @@ void drawRobot() {
     bid = 2;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-0.5f, 3.0f), vec2(-0.5f, 2.0f), vec2(0.5f, 2.0f), vec2(0.5f, 3.0f));
     glPushMatrix(); // Push the Neck's matrix
 
     // Draw the Head
     bid = 3;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-1.0f, 5.0f), vec2(-1.0f, 3.0f), vec2(1.0f, 3.0f), vec2(1.0f, 5.0f));
     
     glPopMatrix(); // Pop the Neck's matrix
     glPopMatrix(); // Pop the Upper Body's matrix
@@ -343,21 +343,21 @@ void drawRobot() {
     bid = 4;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(3.0f, 2.0f), vec2(3.0f, 1.0f), vec2(5.0f, 1.0f), vec2(5.0f, 2.0f));
     glPushMatrix(); // Push the Left Arm's matrix
 
     // Draw the Left Forearm and push its coordinate system into the ModelView matrix stack
     bid = 5;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(5.0f, 2.0f), vec2(5.0f, 1.0f), vec2(7.0f, 1.0f), vec2(7.0f, 2.0f));
     glPushMatrix(); // Push the Left Forearm's matrix
 
     // Draw the Left Hand
     bid = 6;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(7.0f, 2.5f), vec2(7.0f, 0.5f), vec2(9.0f, 0.5f), vec2(9.0f, 2.5f));
 
     glPopMatrix(); // Pop the Left Forearm's matrix
     glPopMatrix(); // Pop the Left Arm's matrix
@@ -367,21 +367,21 @@ void drawRobot() {
     bid = 7;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-5.0f, 2.0f), vec2(-5.0f, 1.0f), vec2(-3.0f, 1.0f), vec2(-3.0f, 2.0f));
     glPushMatrix(); // Push the Right Arm's matrix
 
     // Draw the Right Forearm and push its coordinate system into the ModelView matrix stack
     bid = 8;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-7.0f, 2.0f), vec2(-7.0f, 1.0f), vec2(-5.0f, 1.0f), vec2(-5.0f, 2.0f));
     glPushMatrix(); // Push the Right Forearm's matrix
 
     // Draw the Right Hand
     bid = 9;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-9.0f, 2.5f), vec2(-9.0f, 0.5f), vec2(-7.0f, 0.5f), vec2(-7.0f, 2.5f));
 
     glPopMatrix(); // Pop the Right Forearm's matrix
     glPopMatrix(); // Pop the Right Arm's matrix
@@ -392,21 +392,21 @@ void drawRobot() {
     bid = 10;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(0.5f, -2.0f), vec2(0.5f, -5.0f), vec2(2.0f, -5.0f), vec2(2.0f, -2.0f));
     glPushMatrix(); // Push the Left Thigh's matrix
 
     // Draw the Left Leg and push its coordinate system into the ModelView matrix stack
     bid = 11;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(0.5f, -5.0f), vec2(0.5f, -8.0f), vec2(2.0f, -8.0f), vec2(2.0f, -5.0f));
     glPushMatrix(); // Push the Left Leg's matrix
 
     // Draw the Left Foot
     bid = 12;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(0.5f, -8.0f), vec2(0.5f, -9.0f), vec2(3.5f, -9.0f), vec2(3.5f, -8.0f));
 
     glPopMatrix(); // Pop the Left Leg's matrix
     glPopMatrix(); // Pop the Left Thigh's matrix
@@ -416,21 +416,21 @@ void drawRobot() {
     bid = 13;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-2.0f, -2.0f), vec2(-2.0f, -5.0f), vec2(-0.5f, -5.0f), vec2(-0.5f, -2.0f));
     glPushMatrix(); // Push the Right Thigh's matrix
 
     // Draw the Right Leg and push its coordinate system into the ModelView matrix stack
     bid = 14;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-2.0f, -5.0f), vec2(-2.0f, -8.0f), vec2(-0.5f, -8.0f), vec2(-0.5f, -5.0f));
     glPushMatrix(); // Push the Right Leg's matrix
 
     // Draw the Right Foot
     bid = 15;
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-3.5f, -8.0f), vec2(-3.5f, -9.0f), vec2(-0.5f, -9.0f), vec2(-0.5f, -8.0f));
     
     glPopMatrix(); // Pop the Right Leg's matrix
     glPopMatrix(); // Pop the Right Thigh's matrix
