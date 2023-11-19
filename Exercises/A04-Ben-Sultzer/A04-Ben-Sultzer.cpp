@@ -468,6 +468,7 @@ void reshape(int w, int h)
 
 void keyboard(unsigned char key, int x, int y)
 {
+    // LEFT OFF WITH FIGURING OUT HOW TO CYCLE THROUGH HIERARCHY WITH KEYBOARD INPUT
     if (key == 27) // 'esc' key
         exit(0);
 
