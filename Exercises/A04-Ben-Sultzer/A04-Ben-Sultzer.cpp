@@ -36,7 +36,7 @@ enum class BodyParts {
     RIGHT_FOOT = 15
 };
 
-#define MAX_NUM_CIRCLE 7
+#define MAX_NUM_BODY_PARTS 16
 #define CIRCLE_RADIUM 2.0
 
 int win_width = 600, win_height = 600;
@@ -45,9 +45,9 @@ float canvas_width = 20.0f; float canvas_height = 20.0f;
 
 bool keyStates[256];
 int buttonState;
-float colors[3 * MAX_NUM_CIRCLE];
-float translations[2 * MAX_NUM_CIRCLE];
-float rotations[MAX_NUM_CIRCLE];
+float colors[3 * MAX_NUM_BODY_PARTS];
+float translations[2 * MAX_NUM_BODY_PARTS];
+float rotations[MAX_NUM_BODY_PARTS];
 
 float curMouse[2];
 float preMouse[2];
@@ -263,7 +263,7 @@ void init(void)
     for (int i = 0; i < 256; i++) {
         keyStates[i] = false;
     }
-    for (int i = 0; i < MAX_NUM_CIRCLE; i++) {
+    for (int i = 0; i < MAX_NUM_BODY_PARTS; i++) {
         colors[i * 3 + 0] = 0.0f; // red
         colors[i * 3 + 1] = 0.0f; // green
         colors[i * 3 + 2] = 0.0f; // blue
@@ -412,8 +412,28 @@ void drawRobot() {
     glPopMatrix(); // Pop the Left Thigh's matrix
     glPopMatrix(); // Pop the Lower Body's matrix
 
-    // MATRIX STACK IS EMPTY (SEE NOTEBOOK PAGE), JUST NEED THREE SETS OF STATEMENTS TO DRAW RIGHT LEG, MATRIX PUSHES INCLUDED FOR
-    // EACH LEG PART
+    // Draw the Right Thigh and push its coordinate system into the ModelView matrix stack
+    bid = 13;
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    glPushMatrix(); // Push the Right Thigh's matrix
+
+    // Draw the Right Leg and push its coordinate system into the ModelView matrix stack
+    bid = 14;
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    glPushMatrix(); // Push the Right Leg's matrix
+
+    // Draw the Right Foot
+    bid = 15;
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    
+    glPopMatrix(); // Pop the Right Leg's matrix
+    glPopMatrix(); // Pop the Right Thigh's matrix
 }
 
 void display(void)
