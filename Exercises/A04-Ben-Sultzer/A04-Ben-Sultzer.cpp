@@ -13,30 +13,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <math.h>
+#include <stack>
 #include "Node.h"
 using namespace std;
 using namespace glm;
-
-// The enum for all body part names and corresponding values (to
-// be used as array indices)
-enum class BodyParts {
-    HEAD = 0,
-    NECK = 1,
-    UPPER_BODY = 2,
-    LEFT_ARM = 3,
-    LEFT_FOREARM = 4,
-    LEFT_HAND = 5, 
-    RIGHT_ARM = 6, 
-    RIGHT_FOREARM = 7,
-    RIGHT_HAND = 8,
-    LOWER_BODY = 9,
-    LEFT_THIGH = 10,
-    LEFT_LEG = 11,
-    LEFT_FOOT = 12,
-    RIGHT_THIGH = 13,
-    RIGHT_LEG = 14,
-    RIGHT_FOOT = 15
-};
 
 #define MAX_NUM_BODY_PARTS 16
 #define CIRCLE_RADIUM 2.0
@@ -54,24 +34,31 @@ float rotations[MAX_NUM_BODY_PARTS];
 float curMouse[2];
 float preMouse[2];
 
+// The current selected body part
+BodyParts currSelectedBodyPart;
+
+// Stores the history of selected nodes to access the parent
+// of the currently selected node as it changes
+stack<Node*> parentHistory;
+
 // The array of all body parts
 Node bodyParts[] = {
-        Node("Head"),
-        Node("Neck"),
-        Node("Upper Body"),
-        Node("Left Arm"),
-        Node("Left Forearm"),
-        Node("Left Hand"),
-        Node("Right Arm"),
-        Node("Right Forearm"),
-        Node("Right Hand"),
-        Node("Lower Body"),
-        Node("Left Thigh"),
-        Node("Left Leg"),
-        Node("Left Foot"),
-        Node("Right Thigh"),
-        Node("Right Leg"),
-        Node("Right Foot")
+        Node(BodyParts::HEAD),
+        Node(BodyParts::NECK),
+        Node(BodyParts::UPPER_BODY),
+        Node(BodyParts::LEFT_ARM),
+        Node(BodyParts::LEFT_FOREARM),
+        Node(BodyParts::LEFT_HAND),
+        Node(BodyParts::RIGHT_ARM),
+        Node(BodyParts::RIGHT_FOREARM),
+        Node(BodyParts::RIGHT_HAND),
+        Node(BodyParts::LOWER_BODY),
+        Node(BodyParts::LEFT_THIGH),
+        Node(BodyParts::LEFT_LEG),
+        Node(BodyParts::LEFT_FOOT),
+        Node(BodyParts::RIGHT_THIGH),
+        Node(BodyParts::RIGHT_LEG),
+        Node(BodyParts::RIGHT_FOOT)
 };
 
 /// <summary>
@@ -82,16 +69,16 @@ void buildTree() {
     // Set up the Tree data structure
     for (int i = 0; i < 16; i++) {
         // Get the next body part in the array
-        string currBodyPart = bodyParts[i].getBodyPartName();
+        BodyParts currBodyPart = bodyParts[i].getNodeBodyPart();
 
         // Create a variable to store the current body part's enum class 
         // type when determining what the current body part is
         BodyParts bodyPartType;
 
-        if (currBodyPart == "Head") {
+        if (currBodyPart == BodyParts::HEAD) {
             // Has no child body parts
         }
-        else if (currBodyPart == "Neck") {
+        else if (currBodyPart == BodyParts::NECK) {
             // Assign the neck's center node
             // Set the body part type to HEAD (The neck's center node)
             bodyPartType = BodyParts::HEAD;
@@ -102,7 +89,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[headValue]);
         }
-        else if (currBodyPart == "Upper Body") {
+        else if (currBodyPart == BodyParts::UPPER_BODY) {
             // Assign the upper body's left, center, and right nodes
             // Set the body part type to RIGHT_ARM (The upper body's
             // left node)
@@ -124,7 +111,7 @@ void buildTree() {
             int leftArmValue = static_cast<int>(bodyPartType);
             bodyParts[i].setRightNode(bodyParts[leftArmValue]);
         }
-        else if (currBodyPart == "Left Arm") {
+        else if (currBodyPart == BodyParts::LEFT_ARM) {
             // Assign the left arm's center node
             // Set the body part type to LEFT_FOREARM (The left arm's 
             // center node)
@@ -136,7 +123,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftForearmValue]);
         }
-        else if (currBodyPart == "Left Forearm") {
+        else if (currBodyPart == BodyParts::LEFT_FOREARM) {
             // Assign the left forearm's center node
             // Set the body part type to LEFT_HAND (The left forearm's 
             // center node)
@@ -148,10 +135,10 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftHandValue]);
         }
-        else if (currBodyPart == "Left Hand") {
+        else if (currBodyPart == BodyParts::LEFT_HAND) {
             // Has no child body parts
         }
-        else if (currBodyPart == "Right Arm") {
+        else if (currBodyPart == BodyParts::RIGHT_ARM) {
             // Assign the right arm's center node
             // Set the body part type to RIGHT_FOREARM (The right arm's 
             // center node)
@@ -163,7 +150,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightForearmValue]);
         }
-        else if (currBodyPart == "Right Forearm") {
+        else if (currBodyPart == BodyParts::RIGHT_FOREARM) {
             // Assign the right forearm's center node
             // Set the body part type to RIGHT_HAND (The right forearm's 
             // center node)
@@ -175,10 +162,10 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightHandValue]);
         }
-        else if (currBodyPart == "Right Hand") {
+        else if (currBodyPart == BodyParts::RIGHT_HAND) {
             // Has no child body parts
         }
-        else if (currBodyPart == "Lower Body") {
+        else if (currBodyPart == BodyParts::LOWER_BODY) {
             // Assign the lower body's left, center, and right nodes
             // Set the body part type to RIGHT_THIGH (The lower body's
             // left node)
@@ -200,7 +187,7 @@ void buildTree() {
             int leftThighValue = static_cast<int>(bodyPartType);
             bodyParts[i].setRightNode(bodyParts[leftThighValue]);
         }
-        else if (currBodyPart == "Left Thigh") {
+        else if (currBodyPart == BodyParts::LEFT_THIGH) {
             // Assign the left thigh's center node
             // Set the body part type to LEFT_LEG (The left thigh's 
             // center node)
@@ -212,7 +199,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftLegValue]);
         }
-        else if (currBodyPart == "Left Leg") {
+        else if (currBodyPart == BodyParts::LEFT_LEG) {
             // Assign the left leg's center node
             // Set the body part type to LEFT_FOOT (The left leg's 
             // center node)
@@ -224,10 +211,10 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftFootValue]);
         }
-        else if (currBodyPart == "Left Foot") {
+        else if (currBodyPart == BodyParts::LEFT_FOOT) {
             // Has no child body parts
         }
-        else if (currBodyPart == "Right Thigh") {
+        else if (currBodyPart == BodyParts::RIGHT_THIGH) {
             // Assign the right thigh's center node
             // Set the body part type to RIGHT_LEG (The right thigh's 
             // center node)
@@ -239,7 +226,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightLegValue]);
         }
-        else if (currBodyPart == "Right Leg") {
+        else if (currBodyPart == BodyParts::RIGHT_LEG) {
             // Assign the right leg's center node
             // Set the body part type to RIGHT_FOOT (The right leg's 
             // center node)
@@ -251,7 +238,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightFootValue]);
         }
-        else if (currBodyPart == "Right Foot") {
+        else if (currBodyPart == BodyParts::RIGHT_FOOT) {
             // Has no child body parts
         }
     }
@@ -261,6 +248,9 @@ void init(void)
 {
     // Create the Tree data structure that represents the robot's body
     buildTree();
+
+    // The program starts with the Lower Body selected
+    currSelectedBodyPart = BodyParts::LOWER_BODY;
 
     for (int i = 0; i < 256; i++) {
         keyStates[i] = false;
@@ -449,6 +439,12 @@ void display(void)
     // Draw the robot
     drawRobot();
 
+    // Set the color of the currently selected body part's polygon to show the
+    // user which body part they have selected
+    colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 0] = 1.0f;
+    colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 1] = 0.0f;
+    colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 2] = 0.0f;
+
     glutSwapBuffers();
 }
 
@@ -468,19 +464,86 @@ void reshape(int w, int h)
 
 void keyboard(unsigned char key, int x, int y)
 {
-    // LEFT OFF WITH FIGURING OUT HOW TO CYCLE THROUGH HIERARCHY WITH KEYBOARD INPUT
     if (key == 27) // 'esc' key
         exit(0);
 
-    unsigned char asciiOffset = 49; // see an ascii table
-    for (unsigned char i = '1'; i < '7'; i++) {
-        if (key == i) {
-            keyStates[i] = true;
-            colors[(i - asciiOffset) * 3 + 0] = 1.0f;
-            colors[(i - asciiOffset) * 3 + 1] = 0.0f;
-            colors[(i - asciiOffset) * 3 + 2] = 0.0f;
+    // If the user presses the 's' key, select the current body part's center
+    // child node
+    if (key == 115) {
+        // Indicate that the 's' key was pressed
+        keyStates['s'] = true;
+        
+        // Get the Node of the current body part
+        Node* current = &(bodyParts[static_cast<int>(currSelectedBodyPart)]);
+
+        // Push the Node of the current body part into the parent stack
+        parentHistory.push(current);
+
+        // If the Node of the currently selected body part has a center child,
+        // set the currently selected body part to that child
+        if (current->getCenterNode() != nullptr) {
+            currSelectedBodyPart = current->getCenterNode()->getNodeBodyPart();
         }
     }
+
+    // If the user presses the 'w' key, select the parent node of the current
+    // body part
+    if (key == 119) {
+        // Indicate that the 'w' key was pressed
+        keyStates['w'] = true;
+
+        // Set the currently selected body part to the parent of the current
+        // body part, only if the parent stack is not empty
+        if (!parentHistory.empty()) {
+            // Get the correct parent node from the stack
+            Node* current = parentHistory.top();
+
+            // Pop the correct parent node from the stack
+            parentHistory.pop();
+
+            // Set the currently selected body part to that node
+            currSelectedBodyPart = current->getNodeBodyPart();
+        }
+    }
+
+    // If the user presses the 'a' key, select the current body part's left
+    // child node
+    if (key == 97) {
+        // Indicate that the 'a' key was pressed
+        keyStates['a'] = true;
+
+        // Get the Node of the current body part
+        Node* current = &(bodyParts[static_cast<int>(currSelectedBodyPart)]);
+
+        // Push the Node of the current body part into the parent stack
+        parentHistory.push(current);
+
+        // If the Node of the currently selected body part has a left child,
+        // set the currently selected body part to that child
+        if (current->getLeftNode() != nullptr) {
+            currSelectedBodyPart = current->getLeftNode()->getNodeBodyPart();
+        }
+    }
+
+    // If the user presses the 'd' key, select the current body part's right
+    // child node
+    if (key == 100) {
+        // Indicate that the 'd' key was pressed
+        keyStates['d'] = true;
+
+        // Get the Node of the current body part
+        Node* current = &(bodyParts[static_cast<int>(currSelectedBodyPart)]);
+
+        // Push the Node of the current body part into the parent stack
+        parentHistory.push(current);
+
+        // If the Node of the currently selected body part has a right child,
+        // set the currently selected body part to that child
+        if (current->getRightNode() != nullptr) {
+            currSelectedBodyPart = current->getRightNode()->getNodeBodyPart();
+        }
+    }
+
     glutPostRedisplay();
 }
 
