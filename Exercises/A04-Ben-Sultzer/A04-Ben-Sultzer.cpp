@@ -1,6 +1,6 @@
-//Usage:
-//Hold down the number keys , 1-7, to select one or multiple circles.
-//While circle(s) are selected, use the left mouse button to translate and use the right mouse button to rotate.
+// Course:              IGME 309
+// Student Name:        Ben Sultzer
+// Assignment Number:   04
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
