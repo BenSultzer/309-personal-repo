@@ -24,7 +24,6 @@ using namespace glm;
 int win_width = 600, win_height = 600;
 float canvas_width = 20.0f; float canvas_height = 20.0f;
 
-
 bool keyStates[256];
 int buttonState;
 float colors[3 * MAX_NUM_BODY_PARTS];
@@ -299,16 +298,16 @@ void drawRobot() {
     // Draw the root body part (Lower Body) and push its coordinate system into
     // the ModelView matrix stack two times, once for each child
     bid = static_cast<int>(BodyParts::LOWER_BODY);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 2.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, 0.0f), vec2(-2.0f, -2.0f), vec2(2.0f, -2.0f), vec2(2.0f, 0.0f));
+    drawRectangle(vec2(-2.0f, 2.0f), vec2(-2.0f, 0.0f), vec2(2.0f, 0.0f), vec2(2.0f, 2.0f));
     glPushMatrix(); 
     glPushMatrix(); // Push the Lower Body's matrix
 
     // Draw the Upper Body and push its coordinate system into the ModelView matrix stack three
     // times, once for each child
     bid = static_cast<int>(BodyParts::UPPER_BODY);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] + 2.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
     drawRectangle(vec2(-3.0f, 2.0f), vec2(-3.0f, 0.0f), vec2(3.0f, 0.0f), vec2(3.0f, 2.0f));
     glPushMatrix(); 
@@ -317,39 +316,39 @@ void drawRobot() {
 
     // Draw the Neck and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::NECK);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] + 2.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-0.5f, 3.0f), vec2(-0.5f, 2.0f), vec2(0.5f, 2.0f), vec2(0.5f, 3.0f));
+    drawRectangle(vec2(-0.5f, 1.0f), vec2(-0.5f, 0.0f), vec2(0.5f, 0.0f), vec2(0.5f, 1.0f));
     glPushMatrix(); // Push the Neck's matrix
 
     // Draw the Head
     bid = static_cast<int>(BodyParts::HEAD);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] + 1.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-1.0f, 5.0f), vec2(-1.0f, 3.0f), vec2(1.0f, 3.0f), vec2(1.0f, 5.0f));
+    drawRectangle(vec2(-1.0f, 2.0f), vec2(-1.0f, 0.0f), vec2(1.0f, 0.0f), vec2(1.0f, 2.0f));
     
     glPopMatrix(); // Pop the Neck's matrix
     glPopMatrix(); // Pop the Upper Body's matrix
 
     // Draw the Left Arm and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::LEFT_ARM);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] + 3.0f, translations[bid * 2 + 1] + 1.5f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(3.0f, 2.0f), vec2(3.0f, 1.0f), vec2(5.0f, 1.0f), vec2(5.0f, 2.0f));
+    drawRectangle(vec2(0.0f, 0.5f), vec2(0.0f, -0.5f), vec2(2.0f, -0.5f), vec2(2.0f, 0.5f));
     glPushMatrix(); // Push the Left Arm's matrix
 
     // Draw the Left Forearm and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::LEFT_FOREARM);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] + 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(5.0f, 2.0f), vec2(5.0f, 1.0f), vec2(7.0f, 1.0f), vec2(7.0f, 2.0f));
+    drawRectangle(vec2(0.0f, 0.5f), vec2(0.0f, -0.5f), vec2(2.0f, -0.5f), vec2(2.0f, 0.5f));
     glPushMatrix(); // Push the Left Forearm's matrix
 
     // Draw the Left Hand
     bid = static_cast<int>(BodyParts::LEFT_HAND);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] + 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(7.0f, 2.5f), vec2(7.0f, 0.5f), vec2(9.0f, 0.5f), vec2(9.0f, 2.5f));
+    drawRectangle(vec2(0.0f, 1.0f), vec2(0.0f, -1.0f), vec2(2.0f, -1.0f), vec2(2.0f, 1.0f));
 
     glPopMatrix(); // Pop the Left Forearm's matrix
     glPopMatrix(); // Pop the Left Arm's matrix
@@ -357,23 +356,23 @@ void drawRobot() {
 
     // Draw the Right Arm and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::RIGHT_ARM);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] - 3.0f, translations[bid * 2 + 1] + 1.5f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-5.0f, 2.0f), vec2(-5.0f, 1.0f), vec2(-3.0f, 1.0f), vec2(-3.0f, 2.0f));
+    drawRectangle(vec2(-2.0f, 0.5f), vec2(-2.0f, -0.5f), vec2(0.0f, -0.5f), vec2(0.0f, 0.5f));
     glPushMatrix(); // Push the Right Arm's matrix
 
     // Draw the Right Forearm and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::RIGHT_FOREARM);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] - 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-7.0f, 2.0f), vec2(-7.0f, 1.0f), vec2(-5.0f, 1.0f), vec2(-5.0f, 2.0f));
+    drawRectangle(vec2(-2.0f, 0.5f), vec2(-2.0f, -0.5f), vec2(0.0f, -0.5f), vec2(0.0f, 0.5f));
     glPushMatrix(); // Push the Right Forearm's matrix
 
     // Draw the Right Hand
     bid = static_cast<int>(BodyParts::RIGHT_HAND);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] - 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-9.0f, 2.5f), vec2(-9.0f, 0.5f), vec2(-7.0f, 0.5f), vec2(-7.0f, 2.5f));
+    drawRectangle(vec2(-2.0f, 1.0f), vec2(-2.0f, -1.0f), vec2(0.0f, -1.0f), vec2(0.0f, 1.0f));
 
     glPopMatrix(); // Pop the Right Forearm's matrix
     glPopMatrix(); // Pop the Right Arm's matrix
@@ -382,23 +381,23 @@ void drawRobot() {
 
     // Draw the Left Thigh and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::LEFT_THIGH);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] + 1.25f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(0.5f, -2.0f), vec2(0.5f, -5.0f), vec2(2.0f, -5.0f), vec2(2.0f, -2.0f));
+    drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Left Thigh's matrix
 
     // Draw the Left Leg and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::LEFT_LEG);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(0.5f, -5.0f), vec2(0.5f, -8.0f), vec2(2.0f, -8.0f), vec2(2.0f, -5.0f));
+    drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Left Leg's matrix
 
     // Draw the Left Foot
     bid = static_cast<int>(BodyParts::LEFT_FOOT);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(0.5f, -8.0f), vec2(0.5f, -9.0f), vec2(3.5f, -9.0f), vec2(3.5f, -8.0f));
+    drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -1.0f), vec2(2.75f, -1.0f), vec2(2.75f, 0.0f));
 
     glPopMatrix(); // Pop the Left Leg's matrix
     glPopMatrix(); // Pop the Left Thigh's matrix
@@ -406,23 +405,23 @@ void drawRobot() {
 
     // Draw the Right Thigh and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::RIGHT_THIGH);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0] - 1.25f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, -2.0f), vec2(-2.0f, -5.0f), vec2(-0.5f, -5.0f), vec2(-0.5f, -2.0f));
+    drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Right Thigh's matrix
 
     // Draw the Right Leg and push its coordinate system into the ModelView matrix stack
     bid = static_cast<int>(BodyParts::RIGHT_LEG);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-2.0f, -5.0f), vec2(-2.0f, -8.0f), vec2(-0.5f, -8.0f), vec2(-0.5f, -5.0f));
+    drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Right Leg's matrix
 
     // Draw the Right Foot
     bid = static_cast<int>(BodyParts::RIGHT_FOOT);
-    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1], 0.0f);
+    glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
-    drawRectangle(vec2(-3.5f, -8.0f), vec2(-3.5f, -9.0f), vec2(-0.5f, -9.0f), vec2(-0.5f, -8.0f));
+    drawRectangle(vec2(-2.75f, 0.0f), vec2(-2.75f, -1.0f), vec2(0.75f, -1.0f), vec2(0.75f, 0.0f));
     
     glPopMatrix(); // Pop the Right Leg's matrix
     glPopMatrix(); // Pop the Right Thigh's matrix
@@ -436,14 +435,14 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // Draw the robot
-    drawRobot();
-
     // Set the color of the currently selected body part's polygon to show the
     // user which body part they have selected
     colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 0] = 1.0f;
     colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 1] = 0.0f;
     colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 2] = 0.0f;
+
+    // Draw the robot
+    drawRobot();
 
     glutSwapBuffers();
 }
@@ -542,6 +541,24 @@ void keyboard(unsigned char key, int x, int y)
         if (current->getRightNode() != nullptr) {
             currSelectedBodyPart = current->getRightNode()->getNodeBodyPart();
         }
+    }
+
+    // Rotate the body part counterclockwise if the 'j' key is pressed
+    if (key == 106) {
+        // Indicate that the 'j' key was pressed
+        keyStates['j'] = true;
+
+        // Rotate the body part
+        rotations[15] += 5.0f;
+    }
+
+    // Rotate the body part clockwise if the 'l' key is pressed
+    if (key == 108) {
+        // Indicate that the 'l' key was pressed
+        keyStates['l'] = true;
+
+        // Rotate the body part
+        rotations[15] -= 5.0f;
     }
 
     glutPostRedisplay();
