@@ -475,12 +475,12 @@ void keyboard(unsigned char key, int x, int y)
         // Get the Node of the current body part
         Node* current = &(bodyParts[static_cast<int>(currSelectedBodyPart)]);
 
-        // Push the Node of the current body part into the parent stack
-        parentHistory.push(current);
-
         // If the Node of the currently selected body part has a center child,
         // set the currently selected body part to that child
         if (current->getCenterNode() != nullptr) {
+            // Push the Node of the current body part into the parent stack
+            parentHistory.push(current);
+
             currSelectedBodyPart = current->getCenterNode()->getNodeBodyPart();
         }
     }
@@ -514,12 +514,12 @@ void keyboard(unsigned char key, int x, int y)
         // Get the Node of the current body part
         Node* current = &(bodyParts[static_cast<int>(currSelectedBodyPart)]);
 
-        // Push the Node of the current body part into the parent stack
-        parentHistory.push(current);
-
         // If the Node of the currently selected body part has a left child,
         // set the currently selected body part to that child
         if (current->getLeftNode() != nullptr) {
+            // Push the Node of the current body part into the parent stack
+            parentHistory.push(current);
+
             currSelectedBodyPart = current->getLeftNode()->getNodeBodyPart();
         }
     }
@@ -533,12 +533,12 @@ void keyboard(unsigned char key, int x, int y)
         // Get the Node of the current body part
         Node* current = &(bodyParts[static_cast<int>(currSelectedBodyPart)]);
 
-        // Push the Node of the current body part into the parent stack
-        parentHistory.push(current);
-
         // If the Node of the currently selected body part has a right child,
         // set the currently selected body part to that child
         if (current->getRightNode() != nullptr) {
+            // Push the Node of the current body part into the parent stack
+            parentHistory.push(current);
+
             currSelectedBodyPart = current->getRightNode()->getNodeBodyPart();
         }
     }
@@ -549,7 +549,7 @@ void keyboard(unsigned char key, int x, int y)
         keyStates['j'] = true;
 
         // Rotate the body part
-        rotations[15] += 5.0f;
+        rotations[static_cast<int>(currSelectedBodyPart)] += 5.0f;
     }
 
     // Rotate the body part clockwise if the 'l' key is pressed
@@ -558,7 +558,7 @@ void keyboard(unsigned char key, int x, int y)
         keyStates['l'] = true;
 
         // Rotate the body part
-        rotations[15] -= 5.0f;
+        rotations[static_cast<int>(currSelectedBodyPart)] -= 5.0f;
     }
 
     glutPostRedisplay();
