@@ -65,19 +65,22 @@ Node bodyParts[] = {
 /// represent the robot as a Tree data structure
 /// </summary>
 void buildTree() {
+    // Create a variable to store the current body part in the body parts array
+    Node* currBodyPart;
+
+    // Create a variable to store the current body part's enum class 
+    // type when determining what the current body part is
+    BodyParts bodyPartType;
+
     // Set up the Tree data structure
     for (int i = 0; i < 16; i++) {
         // Get the next body part in the array
-        BodyParts currBodyPart = bodyParts[i].getNodeBodyPart();
+        currBodyPart = new Node(bodyParts[i].getNodeBodyPart());
 
-        // Create a variable to store the current body part's enum class 
-        // type when determining what the current body part is
-        BodyParts bodyPartType;
-
-        if (currBodyPart == BodyParts::HEAD) {
+        if (currBodyPart->getNodeBodyPart() == BodyParts::HEAD) {
             // Has no child body parts
         }
-        else if (currBodyPart == BodyParts::NECK) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::NECK) {
             // Assign the neck's center node
             // Set the body part type to HEAD (The neck's center node)
             bodyPartType = BodyParts::HEAD;
@@ -88,7 +91,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[headValue]);
         }
-        else if (currBodyPart == BodyParts::UPPER_BODY) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::UPPER_BODY) {
             // Assign the upper body's left, center, and right nodes
             // Set the body part type to RIGHT_ARM (The upper body's
             // left node)
@@ -110,7 +113,7 @@ void buildTree() {
             int leftArmValue = static_cast<int>(bodyPartType);
             bodyParts[i].setRightNode(bodyParts[leftArmValue]);
         }
-        else if (currBodyPart == BodyParts::LEFT_ARM) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::LEFT_ARM) {
             // Assign the left arm's center node
             // Set the body part type to LEFT_FOREARM (The left arm's 
             // center node)
@@ -122,7 +125,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftForearmValue]);
         }
-        else if (currBodyPart == BodyParts::LEFT_FOREARM) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::LEFT_FOREARM) {
             // Assign the left forearm's center node
             // Set the body part type to LEFT_HAND (The left forearm's 
             // center node)
@@ -134,10 +137,10 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftHandValue]);
         }
-        else if (currBodyPart == BodyParts::LEFT_HAND) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::LEFT_HAND) {
             // Has no child body parts
         }
-        else if (currBodyPart == BodyParts::RIGHT_ARM) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::RIGHT_ARM) {
             // Assign the right arm's center node
             // Set the body part type to RIGHT_FOREARM (The right arm's 
             // center node)
@@ -149,7 +152,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightForearmValue]);
         }
-        else if (currBodyPart == BodyParts::RIGHT_FOREARM) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::RIGHT_FOREARM) {
             // Assign the right forearm's center node
             // Set the body part type to RIGHT_HAND (The right forearm's 
             // center node)
@@ -161,10 +164,10 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightHandValue]);
         }
-        else if (currBodyPart == BodyParts::RIGHT_HAND) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::RIGHT_HAND) {
             // Has no child body parts
         }
-        else if (currBodyPart == BodyParts::LOWER_BODY) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::LOWER_BODY) {
             // Assign the lower body's left, center, and right nodes
             // Set the body part type to RIGHT_THIGH (The lower body's
             // left node)
@@ -186,7 +189,7 @@ void buildTree() {
             int leftThighValue = static_cast<int>(bodyPartType);
             bodyParts[i].setRightNode(bodyParts[leftThighValue]);
         }
-        else if (currBodyPart == BodyParts::LEFT_THIGH) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::LEFT_THIGH) {
             // Assign the left thigh's center node
             // Set the body part type to LEFT_LEG (The left thigh's 
             // center node)
@@ -198,7 +201,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftLegValue]);
         }
-        else if (currBodyPart == BodyParts::LEFT_LEG) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::LEFT_LEG) {
             // Assign the left leg's center node
             // Set the body part type to LEFT_FOOT (The left leg's 
             // center node)
@@ -210,10 +213,10 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[leftFootValue]);
         }
-        else if (currBodyPart == BodyParts::LEFT_FOOT) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::LEFT_FOOT) {
             // Has no child body parts
         }
-        else if (currBodyPart == BodyParts::RIGHT_THIGH) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::RIGHT_THIGH) {
             // Assign the right thigh's center node
             // Set the body part type to RIGHT_LEG (The right thigh's 
             // center node)
@@ -225,7 +228,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightLegValue]);
         }
-        else if (currBodyPart == BodyParts::RIGHT_LEG) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::RIGHT_LEG) {
             // Assign the right leg's center node
             // Set the body part type to RIGHT_FOOT (The right leg's 
             // center node)
@@ -237,7 +240,7 @@ void buildTree() {
             // Set the center node
             bodyParts[i].setCenterNode(bodyParts[rightFootValue]);
         }
-        else if (currBodyPart == BodyParts::RIGHT_FOOT) {
+        else if (currBodyPart->getNodeBodyPart() == BodyParts::RIGHT_FOOT) {
             // Has no child body parts
         }
     }
