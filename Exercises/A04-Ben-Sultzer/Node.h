@@ -61,7 +61,7 @@ public:
 	/// </summary>
 	/// <param name="p_left">The Node to store as this
 	/// Node's left child Node</param>
-	void setLeftNode(Node p_left);
+	void setLeftNode(Node& p_left);
 
 	/// <summary>
 	/// Returns the left child Node of this Node
@@ -74,7 +74,7 @@ public:
 	/// </summary>
 	/// <param name="p_center">The Node to store as this
 	/// Node's center child Node</param>
-	void setCenterNode(Node p_center);
+	void setCenterNode(Node& p_center);
 
 	/// <summary>
 	/// Returns the center child Node of this Node
@@ -87,7 +87,7 @@ public:
 	/// </summary>
 	/// <param name="p_right">The Node to store as this
 	/// Node's right child Node</param>
-	void setRightNode(Node p_right);
+	void setRightNode(Node& p_right);
 
 	/// <summary>
 	/// Returns the right child Node of this Node

@@ -280,7 +280,6 @@ void init(void)
 /// <param name="topRight">The top right vertex of the rectangle</param>
 void drawRectangle(vec2 topLeft, vec2 bottomLeft, vec2 bottomRight, vec2 topRight)
 {
-    glColor3f(0.0f, 0.0f, 0.0f);
     glLineWidth(3.0f);
     glBegin(GL_LINE_LOOP);
     glVertex2f(topLeft.x, topLeft.y);
@@ -303,6 +302,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::LOWER_BODY);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 2.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-2.0f, 2.0f), vec2(-2.0f, 0.0f), vec2(2.0f, 0.0f), vec2(2.0f, 2.0f));
     glPushMatrix(); 
     glPushMatrix(); // Push the Lower Body's matrix
@@ -312,6 +313,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::UPPER_BODY);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] + 2.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-3.0f, 2.0f), vec2(-3.0f, 0.0f), vec2(3.0f, 0.0f), vec2(3.0f, 2.0f));
     glPushMatrix(); 
     glPushMatrix(); // Push the Upper Body's matrix
@@ -321,6 +324,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::NECK);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] + 2.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-0.5f, 1.0f), vec2(-0.5f, 0.0f), vec2(0.5f, 0.0f), vec2(0.5f, 1.0f));
     glPushMatrix(); // Push the Neck's matrix
 
@@ -328,6 +333,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::HEAD);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] + 1.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-1.0f, 2.0f), vec2(-1.0f, 0.0f), vec2(1.0f, 0.0f), vec2(1.0f, 2.0f));
     
     glPopMatrix(); // Pop the Neck's matrix
@@ -337,6 +344,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::LEFT_ARM);
     glTranslatef(translations[bid * 2 + 0] + 3.0f, translations[bid * 2 + 1] + 1.5f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(0.0f, 0.5f), vec2(0.0f, -0.5f), vec2(2.0f, -0.5f), vec2(2.0f, 0.5f));
     glPushMatrix(); // Push the Left Arm's matrix
 
@@ -344,6 +353,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::LEFT_FOREARM);
     glTranslatef(translations[bid * 2 + 0] + 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(0.0f, 0.5f), vec2(0.0f, -0.5f), vec2(2.0f, -0.5f), vec2(2.0f, 0.5f));
     glPushMatrix(); // Push the Left Forearm's matrix
 
@@ -351,6 +362,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::LEFT_HAND);
     glTranslatef(translations[bid * 2 + 0] + 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(0.0f, 1.0f), vec2(0.0f, -1.0f), vec2(2.0f, -1.0f), vec2(2.0f, 1.0f));
 
     glPopMatrix(); // Pop the Left Forearm's matrix
@@ -361,6 +374,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::RIGHT_ARM);
     glTranslatef(translations[bid * 2 + 0] - 3.0f, translations[bid * 2 + 1] + 1.5f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-2.0f, 0.5f), vec2(-2.0f, -0.5f), vec2(0.0f, -0.5f), vec2(0.0f, 0.5f));
     glPushMatrix(); // Push the Right Arm's matrix
 
@@ -368,6 +383,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::RIGHT_FOREARM);
     glTranslatef(translations[bid * 2 + 0] - 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-2.0f, 0.5f), vec2(-2.0f, -0.5f), vec2(0.0f, -0.5f), vec2(0.0f, 0.5f));
     glPushMatrix(); // Push the Right Forearm's matrix
 
@@ -375,6 +392,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::RIGHT_HAND);
     glTranslatef(translations[bid * 2 + 0] - 2.0f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-2.0f, 1.0f), vec2(-2.0f, -1.0f), vec2(0.0f, -1.0f), vec2(0.0f, 1.0f));
 
     glPopMatrix(); // Pop the Right Forearm's matrix
@@ -386,6 +405,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::LEFT_THIGH);
     glTranslatef(translations[bid * 2 + 0] + 1.25f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Left Thigh's matrix
 
@@ -393,6 +414,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::LEFT_LEG);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Left Leg's matrix
 
@@ -400,6 +423,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::LEFT_FOOT);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -1.0f), vec2(2.75f, -1.0f), vec2(2.75f, 0.0f));
 
     glPopMatrix(); // Pop the Left Leg's matrix
@@ -410,6 +435,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::RIGHT_THIGH);
     glTranslatef(translations[bid * 2 + 0] - 1.25f, translations[bid * 2 + 1], 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Right Thigh's matrix
 
@@ -417,6 +444,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::RIGHT_LEG);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-0.75f, 0.0f), vec2(-0.75f, -3.0f), vec2(0.75f, -3.0f), vec2(0.75f, 0.0f));
     glPushMatrix(); // Push the Right Leg's matrix
 
@@ -424,6 +453,8 @@ void drawRobot() {
     bid = static_cast<int>(BodyParts::RIGHT_FOOT);
     glTranslatef(translations[bid * 2 + 0], translations[bid * 2 + 1] - 3.0f, 0.0f);
     glRotatef(rotations[bid], 0.0f, 0.0f, 1.0f);
+    // Set the drawing color
+    glColor3f(colors[bid * 3 + 0], colors[bid * 3 + 1], colors[bid * 3 + 2]);
     drawRectangle(vec2(-2.75f, 0.0f), vec2(-2.75f, -1.0f), vec2(0.75f, -1.0f), vec2(0.75f, 0.0f));
     
     glPopMatrix(); // Pop the Right Leg's matrix
@@ -443,6 +474,15 @@ void display(void)
     colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 0] = 1.0f;
     colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 1] = 0.0f;
     colors[(static_cast<int>(currSelectedBodyPart)) * 3 + 2] = 0.0f;
+
+    // Reset all other colors to black
+    for (int i = 0; i < MAX_NUM_BODY_PARTS; i++) {
+        if (i != static_cast<int>(currSelectedBodyPart)) {
+            colors[i * 3 + 0] = 0.0f; 
+            colors[i * 3 + 1] = 0.0f; 
+            colors[i * 3 + 2] = 0.0f; 
+        }
+    }
 
     // Draw the robot
     drawRobot();

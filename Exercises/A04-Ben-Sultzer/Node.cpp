@@ -38,7 +38,7 @@ BodyParts Node::getNodeBodyPart()
 /// </summary>
 /// <param name="p_left">The Node to store as this
 /// Node's left child Node</param>
-void Node::setLeftNode(Node p_left)
+void Node::setLeftNode(Node& p_left)
 {
 	left = &p_left;
 }
@@ -57,7 +57,7 @@ Node* Node::getLeftNode()
 /// </summary>
 /// <param name="p_center">The Node to store as this
 /// Node's center child Node</param>
-void Node::setCenterNode(Node p_center)
+void Node::setCenterNode(Node& p_center)
 {
 	center = &p_center;
 }
@@ -76,7 +76,7 @@ Node* Node::getCenterNode()
 /// </summary>
 /// <param name="p_right">The Node to store as this
 /// Node's right child Node</param>
-void Node::setRightNode(Node p_right)
+void Node::setRightNode(Node& p_right)
 {
 	right = &p_right;
 }
