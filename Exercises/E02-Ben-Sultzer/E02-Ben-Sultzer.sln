@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "A04-Ben-Sultzer", "..\A04-B
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2DTransformTree", "..\2DTransformTree\2DTransformTree.vcxproj", "{1E14D24D-83AC-4FA4-94FF-4FBE29A70749}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "E10-Ben-Sultzer", "..\E10-Ben-Sultzer\E10-Ben-Sultzer.vcxproj", "{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{1E14D24D-83AC-4FA4-94FF-4FBE29A70749}.Release|x64.Build.0 = Release|x64
 		{1E14D24D-83AC-4FA4-94FF-4FBE29A70749}.Release|x86.ActiveCfg = Release|Win32
 		{1E14D24D-83AC-4FA4-94FF-4FBE29A70749}.Release|x86.Build.0 = Release|Win32
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Debug|x64.ActiveCfg = Debug|x64
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Debug|x64.Build.0 = Debug|x64
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Debug|x86.ActiveCfg = Debug|Win32
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Debug|x86.Build.0 = Debug|Win32
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Release|x64.ActiveCfg = Release|x64
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Release|x64.Build.0 = Release|x64
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Release|x86.ActiveCfg = Release|Win32
+		{68BC8DF4-0128-41EF-9FE0-05DD39BFAC4A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
