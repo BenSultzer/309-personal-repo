@@ -1,3 +1,7 @@
+// Course:			IGME 309
+// Student Name:	Ben Sultzer
+// Friday Exercise:	10
+
 #include <GL/glew.h>
 
 #ifdef __APPLE__
@@ -96,12 +100,13 @@ void display()
 	// this will bypass the default flat shading mode
 	glEnable(GL_LIGHTING);
 	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos); 
-
-	// add things you'd like to draw ....
 	
 	g_mesh.draw();
 	g_cam.drawCoordinateOnScreen(g_winWidth, g_winHeight);
 	g_cam.drawCoordinate();
+
+	// Draw the bunny AABB
+	g_mesh.drawAABB();
 
 	// display the text
 	if (g_cam.isFocusMode()) {

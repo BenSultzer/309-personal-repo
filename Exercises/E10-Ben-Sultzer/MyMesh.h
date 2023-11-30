@@ -1,3 +1,7 @@
+// Course:			IGME 309
+// Student Name:	Ben Sultzer
+// Friday Exercise:	10
+
 #ifndef MESH_H
 #define MESH_H
 

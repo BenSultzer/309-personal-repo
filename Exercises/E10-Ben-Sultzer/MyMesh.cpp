@@ -1,3 +1,7 @@
+// Course:			IGME 309
+// Student Name:	Ben Sultzer
+// Friday Exercise:	10
+
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
@@ -6,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <limits>
 
 using namespace std;
 
@@ -212,7 +217,53 @@ void MyMesh::drawAABB()
 	glPushMatrix();
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glBegin(GL_LINES);
-	
+	// Front left edge
+	glVertex3f(minVert.x, maxVert.y, maxVert.z);
+	glVertex3f(minVert.x, minVert.y, maxVert.z);
+
+	// Front right edge
+	glVertex3f(maxVert.x, maxVert.y, maxVert.z);
+	glVertex3f(maxVert.x, minVert.y, maxVert.z);
+
+	// Front top edge
+	glVertex3f(minVert.x, maxVert.y, maxVert.z);
+	glVertex3f(maxVert.x, maxVert.y, maxVert.z);
+
+	// Front bottom edge
+	glVertex3f(minVert.x, minVert.y, maxVert.z);
+	glVertex3f(maxVert.x, minVert.y, maxVert.z);
+
+	// Back left edge
+	glVertex3f(minVert.x, maxVert.y, minVert.z);
+	glVertex3f(minVert.x, minVert.y, minVert.z);
+
+	// Back right edge
+	glVertex3f(maxVert.x, maxVert.y, minVert.z);
+	glVertex3f(maxVert.x, minVert.y, minVert.z);
+
+	// Back top edge
+	glVertex3f(minVert.x, maxVert.y, minVert.z);
+	glVertex3f(maxVert.x, maxVert.y, minVert.z);
+
+	// Back bottom edge
+	glVertex3f(minVert.x, minVert.y, minVert.z);
+	glVertex3f(maxVert.x, minVert.y, minVert.z);
+
+	// Left side top edge
+	glVertex3f(minVert.x, maxVert.y, maxVert.z);
+	glVertex3f(minVert.x, maxVert.y, minVert.z);
+
+	// Left side bottom edge
+	glVertex3f(minVert.x, minVert.y, maxVert.z);
+	glVertex3f(minVert.x, minVert.y, minVert.z);
+
+	// Right side top edge
+	glVertex3f(maxVert.x, maxVert.y, maxVert.z);
+	glVertex3f(maxVert.x, maxVert.y, minVert.z);
+
+	// Right side bottom edge
+	glVertex3f(maxVert.x, minVert.y, maxVert.z);
+	glVertex3f(maxVert.x, minVert.y, minVert.z);
 	glEnd();
 	glPopMatrix();
 }
@@ -297,22 +348,22 @@ void MyMesh::computeAABB()
 	minVert = vec3(0.0f, 0.0f, 0.0f);
 
 	// Store the value determined to be the maximum x
-	float maxX = 0.0f;
+	float maxX = -numeric_limits<float>::infinity();
 
 	// Store the value determined to be the maximum y
-	float maxY = 0.0f;
+	float maxY = -numeric_limits<float>::infinity();
 
 	// Store the value determined to be the maximum z
-	float maxZ = 0.0f;
+	float maxZ = -numeric_limits<float>::infinity();
 
 	// Store the value determined to be the minimum x
-	float minX = 0.0f;
+	float minX = numeric_limits<float>::infinity();
 
 	// Store the value determined to be the minimum y
-	float minY = 0.0f;
+	float minY = numeric_limits<float>::infinity();
 
 	// Store the value determined to be the minimum z
-	float minZ = 0.0f;
+	float minZ = numeric_limits<float>::infinity();
 
 	// Loop through the bunny's vertices and find the maximum and minimum
 	// values for x, y, and z
