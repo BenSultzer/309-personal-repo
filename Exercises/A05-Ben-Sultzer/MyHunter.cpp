@@ -12,22 +12,22 @@ MyHunter::MyHunter(vec2 _position, int _ID)
 	// customize your player
 
 	// customize the name of your player
-	playerName = "hunter" + to_string(ID);
+	playerName = "Ace";
 
 	// upgrade your player by calling the upgrade(armor, speed, shotgun, bullet) function
 	// You have a total of 20 points for upgrading, 
 	// and each attribute (armor, speed, shotgun, and bullet) can’t exceed 10 points. 
-	unsigned int armorPoint = 0;
+	unsigned int armorPoint = 5;
 	unsigned int speedPoint = 0;
-	unsigned int shotgunPoint = 0;
-	unsigned int bulletPoint = 0;
+	unsigned int shotgunPoint = 10;
+	unsigned int bulletPoint = 5;
 	upgrade(armorPoint, speedPoint, shotgunPoint, bulletPoint);
 
 	// customize the color of your player
-	bodyColor = vec3(1.0f, 0.0f, 0.0f);
-	headColor = vec3(0.7f, 0.1f, 0.1f);
+	bodyColor = vec3(0.0f, 0.0f, 1.0f);
+	headColor = vec3(0.0f, 0.4f, 0.8f);
 	shotgunColor = vec3(0.0f, 0.0f, 0.0f);
-	bulletColor = vec3(0.0f, 0.0f, 0.0f);
+	bulletColor = vec3(0.9f, 0.8f, 0.1f);
 	// write your code above
 	/******************************/
 
@@ -80,6 +80,7 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 		}
 
 		// Move the hunter away from the nearest monster
+		// 100 OR MORE UNITS AWAY A GOOD DISTANCE FOR STARTING TO CHASE
 		vec2 backwardDir;
 		if ((forwardDir.x != NULL) && (forwardDir.y != NULL)) {
 			backwardDir = vec2(-forwardDir.x, -forwardDir.y);
