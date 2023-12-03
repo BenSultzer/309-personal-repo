@@ -30,10 +30,17 @@ private:
 	vec3 shotgunColor;
 
 	// define your variables
+	// The list of the distances to all monsters
+	vector<float> distances;
 
 /*****************************/
 // functions you need to complete
 public:
+	/// <summary>
+	/// Initializes this hunter
+	/// </summary>
+	/// <param name="_position">The starting position of this hunter</param>
+	/// <param name="_ID">The player ID of this hunter</param>
 	MyHunter(vec2 _position, int _ID);
 	// <summary>
 	/// Update the hunter's position and rotation based on the active monsters and hunters in the scene and update the

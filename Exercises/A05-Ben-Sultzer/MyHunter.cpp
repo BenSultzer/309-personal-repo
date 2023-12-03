@@ -3,6 +3,11 @@
 
 using namespace glm;
 
+/// <summary>
+/// Initializes this hunter
+/// </summary>
+/// <param name="_position">The starting position of this hunter</param>
+/// <param name="_ID">The player ID of this hunter</param>
 MyHunter::MyHunter(vec2 _position, int _ID)
 {
 	this->ID = _ID;
@@ -62,12 +67,18 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 		float minDis = 1000.0f;
 		Monster* nearestMonster = nullptr;
 
+		// Store the distances to all monsters
 		for (int i = 0; i < _monsters.size(); i++) {
 			if (_monsters[i]->isActived == false)
 				continue;
 			float dist = distance(this->position, _monsters[i]->position);
-			if (dist < minDis - 10.0f) {
-				minDis = dist;
+			distances.push_back(dist);
+		}
+
+		// Go through the list of distances and find the nearest distance/monster
+		for (int i = 0; i < distances.size(); i++) {
+			if (distances[i] < minDis) {
+				minDis = distances[i];
 				nearestMonster = _monsters[i];
 			}
 		}
@@ -79,13 +90,27 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 			this->rotation = glm::degrees(atan(forwardDir.y, forwardDir.x));
 		}
 
-		// Move the hunter away from the nearest monster
-		// 100 OR MORE UNITS AWAY A GOOD DISTANCE FOR STARTING TO CHASE
+		// Move the hunter away from the nearest monster if it is less than 100 units
+		// away from this hunter. Otherwise, chase the nearest monster until a distance 
+		// away of 150 units is reached, maintaining a buffer distance of 50 units. If 
+		// there are no alive monsters, don't move at all
 		vec2 backwardDir;
 		if ((forwardDir.x != NULL) && (forwardDir.y != NULL)) {
-			backwardDir = vec2(-forwardDir.x, -forwardDir.y);
-			this->position += backwardDir * speed * _deltaTime;
+			if (minDis < 100.0f) {
+				backwardDir = vec2(-forwardDir.x, -forwardDir.y);
+				this->position += backwardDir * speed * _deltaTime;
+			}
+			else if (minDis != 1000.0f) {
+				// Still keep this hunter at a distance of 100 units so it does not get killed
+				// by standing right on top of the nearest monster
+				if (minDis >= 150.0f) {
+					this->position += forwardDir * speed * _deltaTime;
+				}
+			}
 		}
+
+		// Clear the distances to each monster at the end of the frame
+		distances.clear();
 
 		// Write your implementation above
 		/************************************************************/
