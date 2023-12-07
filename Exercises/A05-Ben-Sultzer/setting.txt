@@ -1,5 +1,5 @@
 Hunter Number (1-30):
-3
+30
 Monster Health Point (1-10):
 5
 Game Duration (seconds):

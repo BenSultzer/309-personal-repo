@@ -101,7 +101,7 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 		// Move the hunter away from the nearest monster if it is less than 100 units
 		// away from this hunter. Otherwise, chase the nearest monster until a distance 
 		// away of 150 units is reached, maintaining a buffer distance of 50 units. If 
-		// there are no alive monsters, don't move at all
+		// there are no living monsters, don't move at all
 		vec2 backwardDir;
 		if ((forwardDir.x != NULL) && (forwardDir.y != NULL)) {
 			if (minDis < 100.0f) {
@@ -109,8 +109,6 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 				this->position += backwardDir * speed * _deltaTime;
 			}
 			else if (minDis != 1000.0f) {
-				// Still keep this hunter at a distance of 100 units so it does not get killed
-				// by standing right on top of the nearest monster
 				if (minDis >= 150.0f) {
 					this->position += forwardDir * speed * _deltaTime;
 				}
@@ -146,7 +144,7 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 bool MyHunter::circleCollision(vec2 c1, vec2 c2, float r1, float r2)
 {
 	/***************************************/
-	// return whether or not two circles are intersected
+	// Return whether or not two circles are intersecting
 	float distance = glm::distance(c1, c2);
 	float radiiSum = r1 + r2;
 
