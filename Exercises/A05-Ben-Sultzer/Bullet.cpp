@@ -1,3 +1,7 @@
+// Course:				IGME 309
+// Student Name:		Ben Sultzer
+// Assignment Number:	05
+
 #include "Bullet.h"
 
 Bullet::Bullet(vec2 _position, float _rotation, Hunter* _attacker, float _speed, vec3 _color)

@@ -1,3 +1,7 @@
+// Course:				IGME 309
+// Student Name:		Ben Sultzer
+// Assignment Number:	05
+
 #include "Monster.h"
 
 void Monster::update(float _deltaTime, vector<Hunter*> hunters)

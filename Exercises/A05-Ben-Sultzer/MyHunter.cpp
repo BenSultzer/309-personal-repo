@@ -1,3 +1,7 @@
+// Course:				IGME 309
+// Student Name:		Ben Sultzer
+// Assignment Number:	05
+
 #include "MyHunter.h"
 #include <glm/glm.hpp>
 
