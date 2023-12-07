@@ -83,10 +83,18 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 			}
 		}
 
-		// Point the hunter at the nearest monster
+		// Calculate the hunter's forward direction (direction to aim and shoot at)
 		vec2 forwardDir;
 		if (nearestMonster != nullptr) {
-			forwardDir = glm::normalize(nearestMonster->position - this->position);
+			// Get the future position of the nearest monster
+			// Calculate the nearest monster's forward direction
+			vec2 monsterFwdDir = glm::normalize(nearestMonster->targetPosition - nearestMonster->position);
+
+			// Get the position that the monster will be in 5 seconds
+			vec2 monsterFuturePos = nearestMonster->position + (monsterFwdDir * speed * 5.0f);
+
+			// Point the hunter at the nearest monster's future position
+			forwardDir = glm::normalize(monsterFuturePos - this->position);
 			this->rotation = glm::degrees(atan(forwardDir.y, forwardDir.x));
 		}
 
